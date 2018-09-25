@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>登录</title>
+<script type="text/javascript">
+	function getCookie(cname){
+	    var name = cname + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0; i<ca.length; i++) {
+	        var c = ca[i].trim();
+	        if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+	    }
+	    return "";
+	}
+	
+</script>
+</head>
+<body>
+错误信息：<h4>${msg!''}</h4>
+<form action="login" method="post">
+<p>账号：<input type="text" name="username" value="zhangsan"/></p>
+<p>密码：<input type="text" name="password" value="123456"/></p>
+<P><input type="checkbox" name="rememberMe" />记住我</P>
+<p><input type="submit" value="登录"/></p>
+</form>
+</body>
+</html>
