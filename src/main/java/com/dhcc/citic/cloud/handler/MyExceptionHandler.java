@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.EnumConfig.ErrCode;
 import com.dhcc.citic.cloud.config.EnumConfig.RetCode;
+import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
 /**
  * 异常统一捕获处理类
@@ -41,9 +42,9 @@ public class MyExceptionHandler {
 	@ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public BaseResult handlerMyException(Exception ex) {
-        LOG.error(ex.getMessage());
+        LOG.error("统一异常处理，ErrCode={}，ErrContent=",ErrCode.COM_SYS_ERR,ex);
         return new BaseResult(RetCode.SYS_ERR,ErrCode.COM_SYS_ERR.getCode(),
-        		String.format(ErrCode.COM_SYS_ERR.getDesc(),ex.getMessage()));
+        		String.format(ErrCode.COM_SYS_ERR.getDesc(),ex.toString()));
     }
 
 	/**
@@ -54,8 +55,35 @@ public class MyExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public BaseResult handlerMyRuntimeException(RuntimeException ex) {
-    	LOG.error(ex.getMessage());
+    	LOG.error("统一异常处理，ErrCode={}，ErrContent=",ErrCode.COM_RUN_ERR,ex);
     	return new BaseResult(RetCode.RUN_ERR,ErrCode.COM_RUN_ERR.getCode(),
-        		String.format(ErrCode.COM_RUN_ERR.getDesc(),ex.getMessage()));
+        		String.format(ErrCode.COM_RUN_ERR.getDesc(),ex.toString()));
+    }
+    
+    /**
+     * 空指针异常
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public BaseResult handlerNullPointerException(NullPointerException ex) {
+    	LOG.error("统一异常处理，ErrCode={}，ErrContent=",ErrCode.COM_BUSI_ERR,ex);
+        return new BaseResult(RetCode.BUSI_ERR,ErrCode.COM_BUSI_ERR.getCode(),
+        		String.format(ErrCode.COM_BUSI_ERR.getDesc(),ex.toString()));
+    }
+
+    
+    /**
+     * 腾讯云API调用异常或返回错误
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(TencentCloudSDKException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public BaseResult handlerTencentCloudSDKException(TencentCloudSDKException ex){
+    	LOG.error("统一异常处理，ErrCode={}，ErrContent=",ErrCode.COM_SDK_ERR,ex);
+    	return new BaseResult(RetCode.SDK_ERR,ErrCode.COM_SDK_ERR.getCode(),
+        		String.format(ErrCode.COM_SDK_ERR.getDesc(),ex.toString()));
     }
 }

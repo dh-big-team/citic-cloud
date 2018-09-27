@@ -25,7 +25,8 @@ public class EnumConfig {
 		DATA_ERR("03","数据异常"),
 		BUSI_ERR("04","业务逻辑异常"),
 		VALID_ERR("05","数据校验异常"),
-		OTHER_ERR("06","其它异常");
+		SDK_ERR("06","云api调用异常"),
+		OTHER_ERR("07","其它异常");
 		
 		private String code;
 		private String desc;
@@ -56,8 +57,10 @@ public class EnumConfig {
 		//校验类错误自定义提示
 		COM_VALID_ERR("050001","COM_VALID_ERR：%s"),
 		VALID_NAMEPWD_ERR("050002","用户名或密码错误"),
+		//云api调用异常
+		COM_SDK_ERR("060001","COM_SDK_ERR：%s"),
 		//其他异常
-		COM_OTHER_ERR("060001","COM_OTHER_ERR：%s");
+		COM_OTHER_ERR("070001","COM_OTHER_ERR：%s");
 		
 		private String code;
 		private String desc;
