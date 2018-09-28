@@ -2,6 +2,7 @@ package com.dhcc.citic.cloud.ctrl;
 
 import java.util.HashMap;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import com.tencentcloudapi.cvm.v20170312.models.DescribeZonesRequest;
 import com.tencentcloudapi.cvm.v20170312.models.DescribeZonesResponse;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/qcloud",produces = "application/json;charset=UTF-8")
 public class ApiCtrl extends BaseCtrl{
 	
 		
@@ -45,7 +46,7 @@ public class ApiCtrl extends BaseCtrl{
 	 * @param jsonParam
 	 * @return
 	 */
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
 	public BaseResult userLogin(@RequestBody JSONObject jsonParam){
 		LOG.info("------------recv param={}",jsonParam);
 		//查找用户信息
@@ -76,12 +77,12 @@ public class ApiCtrl extends BaseCtrl{
 	}
 	
 	/**
-	 * 测试腾讯API
+	 * 测试腾讯API（基于sdk3.0自带模式）
 	 * @param jsonParam
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/qcloud/test1", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/test1")
 	public BaseResult describeZones() throws TencentCloudSDKException{
         // 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey
         Credential cred = new Credential("AKIDiKk3EIdzpcJp8Gr4mKpBQTKzSirprDh0", "GPSJMH0kMtHT1TZZPI5jCXlttiL0Yw9b");
@@ -91,25 +92,24 @@ public class ApiCtrl extends BaseCtrl{
 
         // 实例化一个请求对象
         DescribeZonesRequest req = new DescribeZonesRequest();
-       
 
         // 通过client对象调用想要访问的接口，需要传入请求对象
         DescribeZonesResponse resp = client.DescribeZones(req);
         
         // 输出json格式的字符串回包
-       return new BaseResult(DescribeZonesRequest.toJsonString(resp));
+       return new BaseResult(resp);
 	}
 	
 	/**
-	 * 
+	 * 测试腾讯APi（基于sdk3.0封装的通用模式）
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/qcloud/test2")
+	@RequestMapping(value = "/test2")
 	public BaseResult test2() throws TencentCloudSDKException{
-		Credential cred = new Credential("AKIDiKk3EIdzpcJp8Gr4mKpBQTKzSirprDh012", "GPSJMH0kMtHT1TZZPI5jCXlttiL0Yw9b");
+		Credential cred = new Credential("AKIDiKk3EIdzpcJp8Gr4mKpBQTKzSirprDh0", "GPSJMH0kMtHT1TZZPI5jCXlttiL0Yw9b");
 		ApiRequest req = new ApiRequest("cvm.tencentcloudapi.com","2017-03-12", cred, "ap-guangzhou");
-		String rep = req.internalRequest(new HashMap<String,String>(), "DescribeRegions");
+		JSONObject rep = req.internalRequest(new HashMap<String,String>(), "DescribeRegions");
 		
 		return new BaseResult(rep);
 	}

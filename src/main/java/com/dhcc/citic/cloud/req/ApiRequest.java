@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -102,9 +103,20 @@ public class ApiRequest{
 		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
     
+    public ApiRequest(String endpoint,String version,String path,Credential credential, String region) {
+    	this.credential = credential;
+		this.profile = new ClientProfile();
+		this.endpoint = endpoint;
+		this.region = region;
+		this.path = path;
+		this.sdkVersion = AbstractClient.SDK_VERSION;
+		this.apiVersion = version;
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    }
     
     
-    public String internalRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
+    
+    public JSONObject internalRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
 		
 		Response okRsp = null;
 		String endpoint = this.endpoint;
@@ -149,11 +161,11 @@ public class ApiRequest{
 			throw new TencentCloudSDKException(e.getMessage());
 		}
 		if (errResp!=null && errResp.response.error != null) {
-			throw new TencentCloudSDKException(errResp.response.error + "-" + errResp.response.error, 
+			throw new TencentCloudSDKException(errResp.response.error.code + "-" + errResp.response.error.message, 
 					errResp.response.requestId);
 		}
 		
-		return strResp;
+		return JSONObject.parseObject(strResp).getJSONObject("Response");
 	}
     
     

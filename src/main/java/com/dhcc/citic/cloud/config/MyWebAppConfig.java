@@ -3,7 +3,7 @@ package com.dhcc.citic.cloud.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
  * 文件名称:     MyWebAppConfigurer.java
@@ -20,9 +20,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 版权:   版权所有(C)2018
  * 公司:   深圳市至高通信技术发展有限公司
  */
-@SuppressWarnings("deprecation")
 @Configuration
-public class MyWebAppConfig extends WebMvcConfigurerAdapter{
+public class MyWebAppConfig extends WebMvcConfigurationSupport{
 	
 	/**
 	 * 自定义静态资源
