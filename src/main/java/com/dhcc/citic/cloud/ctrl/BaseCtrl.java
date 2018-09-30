@@ -32,7 +32,7 @@ public class BaseCtrl {
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 	
-	protected Map<String,String> jsonToMap(String jsonSource){
+	protected HashMap<String,String> jsonToMap(String jsonSource){
 		JSONObject jsonObj = JSON.parseObject(jsonSource);
 		HashMap<String,String> targetMap = new HashMap<String,String>();
 		for (Map.Entry<String, Object> entry : jsonObj.entrySet()) { 

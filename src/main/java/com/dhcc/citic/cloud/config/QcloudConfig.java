@@ -21,23 +21,31 @@ import org.springframework.context.annotation.PropertySource;
  * 公司:   深圳市至高通信技术发展有限公司
  */
 @Configuration  //Configuration注解必须加上，否则加载不了
-@PropertySource("classpath:test.properties")
-@ConfigurationProperties(prefix = "test")
-public class TestConfig {
-	private String name;
+@PropertySource("classpath:qcloud.properties")
+@ConfigurationProperties(prefix = "auth")
+public class QcloudConfig {
 	
-	private String url;
+	private String secretId;
+	private String secretKey;
+	private String peerUin;
 	
-	public String getName() {
-		return name;
+	public String getSecretId() {
+		return secretId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSecretId(String secretId) {
+		this.secretId = secretId;
 	}
-	public String getUrl() {
-		return url;
+	public String getSecretKey() {
+		return secretKey;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
 	}
+	public String getPeerUin() {
+		return peerUin;
+	}
+	public void setPeerUin(String peerUin) {
+		this.peerUin = peerUin;
+	}
+	
 }

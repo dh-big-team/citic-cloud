@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
-import com.dhcc.citic.cloud.config.TestConfig;
+import com.dhcc.citic.cloud.config.QcloudConfig;
 
 /**
  * 文件名称:     BootDemoApplication.java
@@ -24,7 +24,7 @@ import com.dhcc.citic.cloud.config.TestConfig;
  */
 @SpringBootApplication
 @ServletComponentScan
-@EnableConfigurationProperties({TestConfig.class})
+@EnableConfigurationProperties({QcloudConfig.class})
 //指定扫描的包路径，默认扫描Application当前目录及子目录
 //@ComponentScan(basePackages={"com.my.bootdemo","com.example.bootdemo"})
 public class BootDemoApplication {

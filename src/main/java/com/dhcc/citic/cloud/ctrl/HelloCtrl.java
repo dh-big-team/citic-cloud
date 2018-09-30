@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.EnumConfig.RetCode;
-import com.dhcc.citic.cloud.config.TestConfig;
 import com.dhcc.citic.cloud.model.PageParam;
 import com.dhcc.citic.cloud.model.SysUser;
 import com.dhcc.citic.cloud.service.UserService;
@@ -30,9 +29,6 @@ public class HelloCtrl {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private TestConfig testConfig;
-	
 	@Autowired  
     private StringRedisTemplate template;  
 	
@@ -41,7 +37,6 @@ public class HelloCtrl {
 		Log.info("------info 进入hello------");
 		Log.warn("------warn 进入hello------");
 		Log.error("------error 进入hello------");
-		Log.debug("-----test.name={}-------",testConfig.getName());
 		ModelAndView view = new ModelAndView();
 		view.addObject("hello", "hello hhhhhh");
 		view.setViewName("index");

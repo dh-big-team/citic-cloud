@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -115,8 +117,14 @@ public class ApiRequest{
     }
     
     
-    
-    public JSONObject internalRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
+    /**
+     * 返回结构包含Response方式的请求
+     * @param param
+     * @param actionName
+     * @return
+     * @throws TencentCloudSDKException
+     */
+    public JSONObject recvResponseRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
 		
 		Response okRsp = null;
 		String endpoint = this.endpoint;
@@ -168,6 +176,56 @@ public class ApiRequest{
 		return JSONObject.parseObject(strResp).getJSONObject("Response");
 	}
     
+    /**
+     * 返回结构为{code:0,message:xx,data:xxx}格式的请求
+     * @param param
+     * @param actionName
+     * @return
+     * @throws TencentCloudSDKException
+     */
+    public JSON recvCodeRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
+		Response okRsp = null;
+		String endpoint = this.endpoint;
+		if (!(this.getClientProfile().getHttpProfile().getEndpoint() == null)) {
+			endpoint = this.getClientProfile().getHttpProfile().getEndpoint();
+		}
+		String strParam = this.formatRequestData(actionName, param);
+		HttpConnection conn = new HttpConnection(this.profile.getHttpProfile().getConnTimeout(), 
+				this.profile.getHttpProfile().getReadTimeout(), this.profile.getHttpProfile().getWriteTimeout());
+		
+		if (this.profile.getHttpProfile().getReqMethod().equals(HttpProfile.REQ_GET)) {
+			
+			okRsp = conn.getRequest(this.profile.getHttpProfile().getProtocol() + 
+					endpoint + this.path +  "?" + strParam);
+
+		} else if (this.profile.getHttpProfile().getReqMethod().equals(HttpProfile.REQ_POST)) {
+			
+			okRsp = conn.postRequest(this.profile.getHttpProfile().getProtocol() + 
+					endpoint + this.path, strParam);
+			
+		} else {
+			throw new TencentCloudSDKException("Method only support (GET, POST)");
+		}
+		
+		if (okRsp.code() != AbstractClient.HTTP_RSP_OK) {
+			throw new TencentCloudSDKException(okRsp.code()+okRsp.message());
+		}
+		String strResp = null;
+		try {
+			strResp = okRsp.body().string();
+		} catch (IOException e) {
+			throw new TencentCloudSDKException(e.getMessage());
+		}
+		JSONObject jsonRep = JSONObject.parseObject(strResp);
+		if(jsonRep!=null && !"0".equals(jsonRep.getString("code"))){
+			throw new TencentCloudSDKException(jsonRep.getString("code") + "-" + jsonRep.getString("message"));
+		}
+		//返回的data中可能是数组
+		if(jsonRep.get("data") instanceof JSONArray){
+			return jsonRep.getJSONArray("data");
+		}
+		return jsonRep.getJSONObject("data");
+	}
     
     private String formatRequestData(String action, Map<String, String> param) throws TencentCloudSDKException {
 		

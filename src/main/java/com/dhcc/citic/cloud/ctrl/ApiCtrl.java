@@ -29,7 +29,7 @@ import com.tencentcloudapi.cvm.v20170312.models.DescribeZonesRequest;
 import com.tencentcloudapi.cvm.v20170312.models.DescribeZonesResponse;
 
 @RestController
-@RequestMapping(value = "/api/qcloud",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/api",produces = "application/json;charset=UTF-8")
 public class ApiCtrl extends BaseCtrl{
 	
 		
@@ -109,7 +109,7 @@ public class ApiCtrl extends BaseCtrl{
 	public BaseResult test2() throws TencentCloudSDKException{
 		Credential cred = new Credential("AKIDiKk3EIdzpcJp8Gr4mKpBQTKzSirprDh0", "GPSJMH0kMtHT1TZZPI5jCXlttiL0Yw9b");
 		ApiRequest req = new ApiRequest("cvm.tencentcloudapi.com","2017-03-12", cred, "ap-guangzhou");
-		JSONObject rep = req.internalRequest(new HashMap<String,String>(), "DescribeRegions");
+		JSONObject rep = req.recvResponseRequest(new HashMap<String,String>(), "DescribeRegions");
 		
 		return new BaseResult(rep);
 	}
