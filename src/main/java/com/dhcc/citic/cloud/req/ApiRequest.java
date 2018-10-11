@@ -27,17 +27,16 @@ import com.tencentcloudapi.common.profile.HttpProfile;
 
 public class ApiRequest{
 	
-	
 	public static final int HTTP_RSP_OK = 200;    
     public static final String SDK_VERSION = "SDK_JAVA_3.0.8";  
     
 	private Credential credential;
 	private ClientProfile profile;
 	private String endpoint= "cvm.tencentcloudapi.com";
-	private String region= "2017-03-12";
+	private String region= "ap-guangzhou";
 	private String path;
     private String sdkVersion;
-    private String apiVersion;
+    private String apiVersion="2017-03-12";
     public Gson gson;
     
     /**
