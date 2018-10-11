@@ -22,6 +22,15 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 public interface CvmService
 {
 	/**
+	 * 查询云服务器实例列表
+	 * @param serviceId
+	 * @param userId
+	 * @param params
+	 * @return
+	 * @throws TencentCloudSDKException 
+	 */
+	public BaseResult citicDescribeInstances(String urlCode,String orgId,String params) throws TencentCloudSDKException;
+	/**
 	 * 创建云服务器实例
 	 * @param serviceId
 	 * @param userId
@@ -29,5 +38,7 @@ public interface CvmService
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult citicRunInstances(String serviceId,String userId,String params) throws TencentCloudSDKException;
+	public BaseResult citicRunInstances(String urlCode,String orgId,String params) throws TencentCloudSDKException;
+	
+
 }
