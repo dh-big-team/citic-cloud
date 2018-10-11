@@ -14,9 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.dhcc.citic.cloud.model.SysUser;
 import com.dhcc.citic.cloud.service.UserService;
-import com.example.bootdemo.proxy.ITestDao;
-import com.example.bootdemo.proxy.StaticProxy;
-import com.example.bootdemo.proxy.TestDao;
+
 
 @Ignore
 @RunWith(SpringRunner.class)
@@ -61,13 +59,6 @@ public class BootDemoApplicationTests {
 		System.out.println("---------------------(user1=user2) is "+user1.equals(user2));
 		System.out.println("---------------------users size="+users.size());
 		Assert.assertTrue(users.size()==1);
-	}
-	
-	@Test
-	public void testProxy(){
-		ITestDao target = new TestDao();
-		StaticProxy proxy = new StaticProxy(target);
-		proxy.save();
 	}
 
 }
