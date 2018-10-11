@@ -33,6 +33,8 @@ public class ReqParamUtil {
 		Set<String> it = json.keySet();
 		for(String key : it){
 			Object obj = json.get(key);
+			//首字母大写处理
+			key = key.substring(0, 1).toUpperCase() + key.substring(1);
 			if(obj instanceof JSONObject || obj instanceof JSONArray){
 				ReqParamUtil.relaxJsonStr(obj, key, paramMap); 
 			}else{
@@ -53,6 +55,8 @@ public class ReqParamUtil {
 			Set<String> it = jsonObject.keySet();
 			for(String key : it){
 				Object obj = jsonObject.get(key);
+				//首字母大写处理
+				key = key.substring(0, 1).toUpperCase() + key.substring(1);
 				if(obj instanceof JSONObject || obj instanceof JSONArray){
 					
 					relaxJsonStr(obj,prefix+"."+key,param);

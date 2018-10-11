@@ -2,7 +2,6 @@ package com.dhcc.citic.cloud.ctrl;
 
 import java.util.HashMap;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.EnumConfig.ErrCode;
@@ -20,9 +19,12 @@ import com.dhcc.citic.cloud.model.SysMenu;
 import com.dhcc.citic.cloud.model.SysUser;
 import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
+import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.MenuService;
 import com.dhcc.citic.cloud.service.TmpSecretService;
+import com.dhcc.citic.cloud.service.ServiceManager;
 import com.dhcc.citic.cloud.service.UserService;
+import com.dhcc.citic.cloud.service.impl.ServiceManagerImpl;
 import com.dhcc.citic.cloud.utils.CommonUtil;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -43,6 +45,11 @@ public class ApiCtrl extends BaseCtrl{
 	private MenuService menuService;
 	@Autowired
 	private TmpSecretService tmpSecretService;
+	@Autowired
+	private CvmService cvmService;
+	@Autowired
+	private ServiceManager serviceManager;
+
 	
 	
 	/**
@@ -117,4 +124,48 @@ public class ApiCtrl extends BaseCtrl{
 		JSONObject rep = req.recvResponseRequest(new HashMap<String,String>(), "DescribeRegions");
 		return new BaseResult(rep);
 	}
+	
+	/**
+	 * 查询实例列表接口
+	 * @return
+	 * @throws TencentCloudSDKException 
+	 */
+	@RequestMapping(value = "/qcloud/select_instances",method = RequestMethod.GET)
+	public BaseResult QueryInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
+		JSONArray instanceIds = JSONArray.parseArray((String)jsonParam.get("instanceIds"));
+		JSONArray filters = JSONArray.parseArray((String)jsonParam.get("filters"));
+		String pageIndex = (String)jsonParam.get("pageIndex");
+		String limit = (String) jsonParam.get("pageSize");
+		String orgId = (String) jsonParam.get("orgId");		
+		String serviceId = (String) jsonParam.get("serviceId");
+		//中信和腾讯的起始页相差1
+		Integer offset = Integer.parseInt(pageIndex)-1;
+		JSONObject paramObj = new JSONObject();
+		paramObj.put("instanceIds", instanceIds);
+		paramObj.put("filters", filters);
+		paramObj.put("offset", offset.toString());
+		paramObj.put("limit", limit);
+		String params = paramObj.toJSONString();
+		return serviceManager.doSelectList(serviceId, orgId, params);
+	}
+	/**
+	 * 创建实例接口
+	 * @return
+	 * @throws TencentCloudSDKException 
+	 */
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/qcloud/create_instances",method = RequestMethod.POST)
+	public BaseResult createInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
+		String citicInfo = (String)jsonParam.get("citicInfo");
+		String params = (String)jsonParam.get("params");
+		String otherInfo = (String)jsonParam.get("otherInfo");
+		String serviceId = (String) jsonParam.get("serviceId");
+		String instanceId = (String) jsonParam.get("instanceId");		
+		String requestId = (String) jsonParam.get("requestId");
+		//取得userId
+		JSONObject info = JSONObject.parseObject(citicInfo);
+		String orgId = info.getString("orgId");
+		return serviceManager.doCreate(serviceId, orgId, params);
+	}
+
 }
