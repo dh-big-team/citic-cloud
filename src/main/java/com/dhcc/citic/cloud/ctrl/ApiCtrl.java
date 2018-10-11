@@ -2,7 +2,6 @@ package com.dhcc.citic.cloud.ctrl;
 
 import java.util.HashMap;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
@@ -24,6 +22,7 @@ import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.MenuService;
 import com.dhcc.citic.cloud.service.ServiceManager;
 import com.dhcc.citic.cloud.service.UserService;
+import com.dhcc.citic.cloud.service.impl.ServiceManagerImpl;
 import com.dhcc.citic.cloud.utils.CommonUtil;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -126,7 +125,7 @@ public class ApiCtrl extends BaseCtrl{
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/qcloud/create_instances",method = RequestMethod.GET)
+	@RequestMapping(value = "/qcloud/select_instances",method = RequestMethod.GET)
 	public BaseResult QueryInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
 		JSONArray instanceIds = JSONArray.parseArray((String)jsonParam.get("instanceIds"));
 		JSONArray filters = JSONArray.parseArray((String)jsonParam.get("filters"));
@@ -161,7 +160,7 @@ public class ApiCtrl extends BaseCtrl{
 		//取得userId
 		JSONObject info = JSONObject.parseObject(citicInfo);
 		String orgId = info.getString("orgId");
-		return cvmService.citicRunInstances(serviceId, orgId, params);
+		return serviceManager.doCreate(serviceId, orgId, params);
 	}
 
 }

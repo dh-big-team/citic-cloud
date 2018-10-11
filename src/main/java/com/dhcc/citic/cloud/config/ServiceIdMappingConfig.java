@@ -1,5 +1,6 @@
 package com.dhcc.citic.cloud.config;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +32,8 @@ public class ServiceIdMappingConfig {
 	private String urlSuffixV3;
 	private String serviceToProductId;
 	private String productIdToUrlCode;
-	private Map<String, String> productIds;
-	private Map<String, String> UrlCodes;
+	private Map<String, String> productIds = new HashMap<>();
+	private Map<String, String> urlCodes = new HashMap<>();
 	
 	public String getUrlSuffixV2()
 	{
@@ -80,7 +81,7 @@ public class ServiceIdMappingConfig {
 			for (String string : strings)
 			{
 				String[] strs = string.split(":");
-				this.UrlCodes.put(strs[0], strs[1]);
+				this.urlCodes.put(strs[0], strs[1]);
 			}
 		}
 	}
@@ -94,10 +95,10 @@ public class ServiceIdMappingConfig {
 	}
 	public Map<String, String> getUrlCodes()
 	{
-		return UrlCodes;
+		return urlCodes;
 	}
 	public void setUrlCodes(Map<String, String> urlCodes)
 	{
-		UrlCodes = urlCodes;
+		this.urlCodes = urlCodes;
 	}
 }
