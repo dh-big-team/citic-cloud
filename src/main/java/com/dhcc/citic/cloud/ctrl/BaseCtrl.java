@@ -20,8 +20,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+
 
 public class BaseCtrl {
 	
@@ -31,16 +30,6 @@ public class BaseCtrl {
         CustomDateEditor dateEditor = new CustomDateEditor(format, true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
-	
-	protected HashMap<String,String> jsonToMap(String jsonSource){
-		JSONObject jsonObj = JSON.parseObject(jsonSource);
-		HashMap<String,String> targetMap = new HashMap<String,String>();
-		for (Map.Entry<String, Object> entry : jsonObj.entrySet()) { 
-			targetMap.put(entry.getKey(), String.valueOf(entry.getValue()));
-			System.out.println(entry.getKey() + ":" + entry.getValue());
-		}
-		return targetMap;
-	}
     
     public Object getAttribute(String attributeName) {
         return this.getRequest().getAttribute(attributeName);

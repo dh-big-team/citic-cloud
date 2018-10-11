@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
  * 2018年5月29日     Zeng Dongcheng   1.0     新建
  *
  * 版权:   版权所有(C)2018
- * 公司:   深圳市至高通信技术发展有限公司
+ * 公司:   东华云计算有限公司
  */
 @Configuration
 public class MyEnvironmentAware implements EnvironmentAware{

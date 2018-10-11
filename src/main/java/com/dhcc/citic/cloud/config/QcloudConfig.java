@@ -18,7 +18,7 @@ import org.springframework.context.annotation.PropertySource;
  * 2018年5月30日     Zeng Dongcheng   1.0     新建
  *
  * 版权:   版权所有(C)2018
- * 公司:   深圳市至高通信技术发展有限公司
+ * 公司:   东华云计算有限公司
  */
 @Configuration  //Configuration注解必须加上，否则加载不了
 @PropertySource("classpath:qcloud.properties")

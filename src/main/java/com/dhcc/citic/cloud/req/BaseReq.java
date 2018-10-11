@@ -9,7 +9,7 @@ import com.dhcc.citic.cloud.config.QcloudConfig;
 import com.tencentcloudapi.common.Credential;
 
 /**
- * 腾讯云api通用请求参数类
+ * 腾讯云api通用请求参数类（暂时无用）
  * 文件名称:     BaseReq.java
  * 内容摘要: 
  * @author:   Zeng Dongcheng

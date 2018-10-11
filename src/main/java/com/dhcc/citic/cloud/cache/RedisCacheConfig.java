@@ -29,7 +29,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
  * 2018年6月27日     Zeng Dongcheng   1.0     新建
  *
  * 版权:   版权所有(C)2018
- * 公司:   深圳市至高通信技术发展有限公司
+ * 公司:   东华云计算有限公司
  */
 @Configuration
 @EnableCaching //开启缓存支持

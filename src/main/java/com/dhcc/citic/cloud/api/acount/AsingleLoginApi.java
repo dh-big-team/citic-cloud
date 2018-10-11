@@ -19,12 +19,29 @@ import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.Sign;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
+/**
+ * 中信侧用户获取腾讯免密登录控制台url
+ * 文件名称:     AsingleLoginApi.java
+ * 内容摘要: 
+ * @author:   Zeng Dongcheng
+ * @version:  1.0  
+ * @Date:     2018年10月11日下午4:15:28 
+ * 
+ * 修改历史:  
+ * 修改日期                     修改人员                                   版本	            修改内容  
+ * ----------------------------------------------  
+ * 2018年10月11日     Zeng Dongcheng   1.0     新建
+ *
+ * 版权:   版权所有(C)2018
+ * 公司:   东华云计算有限公司
+ */
 @RestController
 @RequestMapping(value = "/asingle")
-public class AsingleLogin extends BaseCtrl{
+public class AsingleLoginApi extends BaseCtrl{
 
 	@Autowired
 	QcloudConfig qcloudConfig;
+	
 	
 	@RequestMapping(value = "/login")
 	public BaseResult asingleLogin(HttpServletRequest req,HttpServletResponse rep) throws TencentCloudSDKException, IOException{

@@ -19,7 +19,7 @@ import com.alibaba.druid.support.http.StatViewServlet;
  * 2018年5月21日     Zeng Dongcheng   1.0     新建
  *
  * 版权:   版权所有(C)2018
- * 公司:   深圳市至高通信技术发展有限公司
+ * 公司:   东华云计算有限公司
  */
 @WebServlet(urlPatterns="/druid/*",initParams={
 	@WebInitParam(name="allow",value="192.168.1.72,127.0.0.1"),// IP白名单 (没有配置或者为空，则允许所有访问)

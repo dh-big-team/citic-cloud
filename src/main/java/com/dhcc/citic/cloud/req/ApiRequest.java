@@ -25,6 +25,22 @@ import com.tencentcloudapi.common.http.HttpConnection;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 
+/**
+ * 腾讯侧api请求包装类
+ * 文件名称:     ApiRequest.java
+ * 内容摘要: 
+ * @author:   Zeng Dongcheng
+ * @version:  1.0  
+ * @Date:     2018年10月11日下午4:21:12 
+ * 
+ * 修改历史:  
+ * 修改日期                     修改人员                                   版本	            修改内容  
+ * ----------------------------------------------  
+ * 2018年10月11日     Zeng Dongcheng   1.0     新建
+ *
+ * 版权:   版权所有(C)2018
+ * 公司:   东华云计算有限公司
+ */
 public class ApiRequest{
 	
 	public static final int HTTP_RSP_OK = 200;    
