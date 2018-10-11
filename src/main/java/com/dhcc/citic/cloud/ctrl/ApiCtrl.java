@@ -24,7 +24,6 @@ import com.dhcc.citic.cloud.service.MenuService;
 import com.dhcc.citic.cloud.service.TmpSecretService;
 import com.dhcc.citic.cloud.service.ServiceManager;
 import com.dhcc.citic.cloud.service.UserService;
-import com.dhcc.citic.cloud.service.impl.ServiceManagerImpl;
 import com.dhcc.citic.cloud.utils.CommonUtil;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -45,8 +44,6 @@ public class ApiCtrl extends BaseCtrl{
 	private MenuService menuService;
 	@Autowired
 	private TmpSecretService tmpSecretService;
-	@Autowired
-	private CvmService cvmService;
 	@Autowired
 	private ServiceManager serviceManager;
 
