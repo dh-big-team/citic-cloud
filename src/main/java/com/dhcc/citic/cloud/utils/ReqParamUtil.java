@@ -44,6 +44,26 @@ public class ReqParamUtil {
 	}
 	
 	/**
+	 * 将jsonobject转为腾讯api要求格式的map
+	 * @param jsonStr
+	 * @return
+	 */
+	public static void jsonObjectToMap(HashMap<String,String> paramMap,JSONObject jsonParam){
+		Set<String> it = jsonParam.keySet();
+		for(String key : it){
+			Object obj = jsonParam.get(key);
+			//首字母大写处理
+			key = key.substring(0, 1).toUpperCase() + key.substring(1);
+			if(obj instanceof JSONObject || obj instanceof JSONArray){
+				ReqParamUtil.relaxJsonStr(obj, key, paramMap); 
+			}else{
+				paramMap.put(key, String.valueOf(obj));
+			}
+		}
+	}
+	
+	
+	/**
 	 * 递归解析Json对象
 	 * @param sourceJson
 	 * @param prefix
