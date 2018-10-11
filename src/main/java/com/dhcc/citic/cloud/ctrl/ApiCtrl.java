@@ -18,8 +18,10 @@ import com.dhcc.citic.cloud.config.EnumConfig.RetCode;
 import com.dhcc.citic.cloud.config.EnumConfig.UserStatus;
 import com.dhcc.citic.cloud.model.SysMenu;
 import com.dhcc.citic.cloud.model.SysUser;
+import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
 import com.dhcc.citic.cloud.service.MenuService;
+import com.dhcc.citic.cloud.service.TmpSecretService;
 import com.dhcc.citic.cloud.service.UserService;
 import com.dhcc.citic.cloud.utils.CommonUtil;
 import com.tencentcloudapi.common.Credential;
@@ -39,6 +41,8 @@ public class ApiCtrl extends BaseCtrl{
 	private UserService userService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private TmpSecretService tmpSecretService;
 	
 	
 	/**
@@ -82,7 +86,7 @@ public class ApiCtrl extends BaseCtrl{
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/test1")
+	@RequestMapping(value = "/DescribeZones")
 	public BaseResult describeZones() throws TencentCloudSDKException{
         // 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey
         Credential cred = new Credential("AKIDiKk3EIdzpcJp8Gr4mKpBQTKzSirprDh0", "GPSJMH0kMtHT1TZZPI5jCXlttiL0Yw9b");
@@ -105,9 +109,10 @@ public class ApiCtrl extends BaseCtrl{
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/test2")
-	public BaseResult test2() throws TencentCloudSDKException{
-		Credential cred = new Credential("AKIDiKk3EIdzpcJp8Gr4mKpBQTKzSirprDh0", "GPSJMH0kMtHT1TZZPI5jCXlttiL0Yw9b");
+	@RequestMapping(value = "/DescribeRegions")
+	public BaseResult test2(String uin) throws TencentCloudSDKException{
+		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(uin);
+		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		ApiRequest req = new ApiRequest("cvm.tencentcloudapi.com","2017-03-12", cred, "ap-guangzhou");
 		JSONObject rep = req.recvResponseRequest(new HashMap<String,String>(), "DescribeRegions");
 		

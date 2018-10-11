@@ -46,7 +46,8 @@ public class AcountApi extends BaseCtrl{
 	
 	@RequestMapping(value = "/DescribeProject")
 	public BaseResult apiDescribeInstances(@RequestBody String recvParam) throws TencentCloudSDKException{
-		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
+		TmpSecret tmpSecret = tmpSecretService.getTmpSecret("100007839763");
+		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		ApiRequest req = new ApiRequest("account.api.qcloud.com","2017-03-12","/v2/index.php", cred, "ap-guangzhou");
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
