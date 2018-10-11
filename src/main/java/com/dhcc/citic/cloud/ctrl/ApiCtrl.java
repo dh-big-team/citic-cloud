@@ -122,6 +122,7 @@ public class ApiCtrl extends BaseCtrl{
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/qcloud/create_instances")
 	public BaseResult CreateInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
 		String citicInfo = (String)jsonParam.get("citicInfo");
