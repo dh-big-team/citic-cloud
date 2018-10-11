@@ -19,6 +19,7 @@ import com.dhcc.citic.cloud.config.EnumConfig.UserStatus;
 import com.dhcc.citic.cloud.model.SysMenu;
 import com.dhcc.citic.cloud.model.SysUser;
 import com.dhcc.citic.cloud.req.ApiRequest;
+import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.MenuService;
 import com.dhcc.citic.cloud.service.UserService;
 import com.dhcc.citic.cloud.utils.CommonUtil;
@@ -39,6 +40,8 @@ public class ApiCtrl extends BaseCtrl{
 	private UserService userService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private CvmService cvmService;
 	
 	
 	/**
@@ -113,4 +116,24 @@ public class ApiCtrl extends BaseCtrl{
 		
 		return new BaseResult(rep);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws TencentCloudSDKException 
+	 */
+	@RequestMapping(value = "/qcloud/create_instances")
+	public BaseResult CreateInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
+		String citicInfo = (String)jsonParam.get("citicInfo");
+		String params = (String)jsonParam.get("params");
+		String otherInfo = (String)jsonParam.get("otherInfo");
+		String serviceId = (String) jsonParam.get("serviceId");
+		String instanceId = (String) jsonParam.get("instanceId");		
+		String requestId = (String) jsonParam.get("requestId");
+		//取得userId
+		JSONObject info = JSONObject.parseObject(citicInfo);
+		String userId = info.getString("userId");
+		return cvmService.citicRunInstances(serviceId, userId, params);
+	}
+	
 }
