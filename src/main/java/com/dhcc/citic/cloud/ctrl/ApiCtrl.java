@@ -115,7 +115,6 @@ public class ApiCtrl extends BaseCtrl{
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		ApiRequest req = new ApiRequest("cvm.tencentcloudapi.com","2017-03-12", cred, "ap-guangzhou");
 		JSONObject rep = req.recvResponseRequest(new HashMap<String,String>(), "DescribeRegions");
-		
 		return new BaseResult(rep);
 	}
 }
