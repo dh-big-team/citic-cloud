@@ -1,5 +1,8 @@
 package com.dhcc.citic.cloud.ctrl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
@@ -29,13 +31,16 @@ public class CloudCtrl extends BaseCtrl{
 	 * @throws TencentCloudSDKException 
 	 */
 	@RequestMapping(value = "/select_instances",method = RequestMethod.GET)
-	public BaseResult QueryInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
-		JSONArray instanceIds = JSONArray.parseArray((String)jsonParam.get("instanceIds"));
-		JSONArray filters = JSONArray.parseArray((String)jsonParam.get("filters"));
-		String pageIndex = (String)jsonParam.get("pageIndex");
-		String limit = (String) jsonParam.get("pageSize");
-		String orgId = (String) jsonParam.get("orgId");		
-		String serviceId = (String) jsonParam.get("serviceId");
+	public BaseResult QueryInstances() throws TencentCloudSDKException{
+		@SuppressWarnings("unchecked")
+		Map<String, String[]> reqMap = new HashMap<>(super.getParameterMap());
+		
+		String[] instanceIds = reqMap.get("instanceIds");
+		String[] filters = reqMap.get("filters");
+		String pageIndex = reqMap.get("pageIndex")[0];
+		String limit = reqMap.get("pageSize")[0];
+		String orgId = reqMap.get("orgId")[0];		
+		String serviceId = reqMap.get("serviceId")[0];
 		//中信和腾讯的起始页相差1
 		Integer offset = Integer.parseInt(pageIndex)-1;
 		JSONObject paramObj = new JSONObject();

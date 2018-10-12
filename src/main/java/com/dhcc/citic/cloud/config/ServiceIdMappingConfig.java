@@ -28,9 +28,9 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "mapping")
 public class ServiceIdMappingConfig {
 	
-	private String urlSuffixV2;
-	private String urlSuffixV3;
-	private String serviceToProductId;
+	private String urlSuffixV2;	//V2版本
+	private String urlSuffixV3;	//V3版本
+	private String serviceToProductId;	
 	private String productIdToUrlCode;
 	private Map<String, String> productIds = new HashMap<>();
 	private Map<String, String> urlCodes = new HashMap<>();

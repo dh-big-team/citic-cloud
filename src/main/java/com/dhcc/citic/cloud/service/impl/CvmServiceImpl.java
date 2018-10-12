@@ -1,14 +1,18 @@
 package com.dhcc.citic.cloud.service.impl;
 
 import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.QcloudConfig;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
+import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
 import com.dhcc.citic.cloud.service.CvmService;
+import com.dhcc.citic.cloud.service.TmpSecretService;
 import com.dhcc.citic.cloud.utils.ReqParamUtil;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -36,6 +40,8 @@ public class CvmServiceImpl implements CvmService
 	QcloudConfig qcloudConfig;
 	@Autowired
 	ServiceIdMappingConfig serviceIdMappingConfig;
+	@Autowired
+	TmpSecretService tmpSecretService;
 	
 	@Override
 	public BaseResult citicDescribeInstances(String urlcode, String orgId, String params) throws TencentCloudSDKException
@@ -45,15 +51,20 @@ public class CvmServiceImpl implements CvmService
 		ReqParamUtil.jsonStrToMap(reqMap, params);
 		
 		//生成腾讯鉴权
-		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
+		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
+		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
 		//组合接口域名
 		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
 		
-		ApiRequest req = new ApiRequest(endPoint,"2017-03-12", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest(endPoint, cred);
 		
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeInstances");
+		
+		//将数据包装成中信要求的格式
+		
+		
 		return new BaseResult(rep);
 	}
 
@@ -65,12 +76,13 @@ public class CvmServiceImpl implements CvmService
 		ReqParamUtil.jsonStrToMap(reqMap, params);
 		
 		//生成腾讯鉴权
-		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
+		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
+		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
 		//组合接口域名
 		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
 		
-		ApiRequest req = new ApiRequest(endPoint,"2017-03-12", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest(endPoint, cred);
 		
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "RunInstances");
