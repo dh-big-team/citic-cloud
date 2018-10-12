@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
+import com.dhcc.citic.cloud.common.CiticQueryResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
@@ -64,8 +65,9 @@ public class MysqlServiceImpl implements MysqlService{
 		ApiRequest req = new ApiRequest(endPoint,"/",cred,"ap-guangzhou","SDK_JAVA_3.0.8","2017-03-20");
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeDBInstances");
+		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"Items");
 		//将数据包装成中信要求的格式
-		return new BaseResult(rep);
+		return new BaseResult(result);
 	}
 
 }
