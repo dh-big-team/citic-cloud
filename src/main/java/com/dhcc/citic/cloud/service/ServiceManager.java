@@ -21,8 +21,32 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  */
 public interface ServiceManager
 {
+	/**
+	 * 分发查询实例列表业务
+	 * @param serviceId
+	 * @param orgId
+	 * @param params
+	 * @return
+	 * @throws TencentCloudSDKException
+	 */
 	public BaseResult doSelectList(String serviceId, String orgId, String params) throws TencentCloudSDKException;
+	/**
+	 * 分发创建实例业务
+	 * @param serviceId
+	 * @param orgId
+	 * @param params
+	 * @return
+	 * @throws TencentCloudSDKException
+	 */
 	public BaseResult doCreate(String serviceId, String orgId, String params) throws TencentCloudSDKException;
+	/**
+	 * 分发修改实例业务
+	 * @param serviceId
+	 * @param orgId
+	 * @param params
+	 * @return
+	 * @throws TencentCloudSDKException
+	 */
 	public BaseResult doUpdate(String serviceId, String orgId, String params) throws TencentCloudSDKException;
 	
 }
