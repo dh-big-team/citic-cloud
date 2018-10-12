@@ -12,7 +12,6 @@ import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 @Service("cbsService")
 public class CbsServiceImpl implements  CbsService{
-
 	@Autowired
 	QcloudConfig qcloudConfig;
 	@Override

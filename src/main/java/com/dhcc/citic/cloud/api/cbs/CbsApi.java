@@ -12,7 +12,6 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 @RestController
 @RequestMapping(value = "/api/cbs")
 public class CbsApi extends BaseCtrl {
-	
 	@Autowired
 	QcloudConfig qcloudConfig;
 	@Autowired
