@@ -1,5 +1,6 @@
 package com.dhcc.citic.cloud.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
@@ -29,7 +30,7 @@ public interface CvmService
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	public BaseResult citicDescribeInstances(String urlCode,String orgId,String params) throws TencentCloudSDKException;
+	public BaseResult citicDescribeInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 	/**
 	 * 创建云服务器实例
 	 * @param serviceId
@@ -38,7 +39,7 @@ public interface CvmService
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult citicRunInstances(String urlCode,String orgId,String params) throws TencentCloudSDKException;
+	public BaseResult citicRunInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 
 }

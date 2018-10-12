@@ -1,14 +1,13 @@
 package com.dhcc.citic.cloud.service.impl;
 
 import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.QcloudConfig;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
+import com.dhcc.citic.cloud.model.CiticQueryResult;
 import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
 import com.dhcc.citic.cloud.service.CvmService;
@@ -44,11 +43,11 @@ public class CvmServiceImpl implements CvmService
 	TmpSecretService tmpSecretService;
 	
 	@Override
-	public BaseResult citicDescribeInstances(String urlcode, String orgId, String params) throws TencentCloudSDKException
+	public BaseResult citicDescribeInstances(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
 	{
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
-		ReqParamUtil.jsonStrToMap(reqMap, params);
+		ReqParamUtil.jsonObjectToMap(reqMap, params);
 		
 		//生成腾讯鉴权
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
@@ -57,23 +56,22 @@ public class CvmServiceImpl implements CvmService
 		//组合接口域名
 		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
 		
-		ApiRequest req = new ApiRequest(endPoint, cred);
-		
 		//调用腾讯接口
+		ApiRequest req = new ApiRequest(endPoint, cred);
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeInstances");
 		
 		//将数据包装成中信要求的格式
-		
-		
-		return new BaseResult(rep);
+		CiticQueryResult result = new CiticQueryResult(reqMap,rep);
+				
+		return new BaseResult(result);
 	}
 
 	@Override
-	public BaseResult citicRunInstances(String urlcode,String orgId,String params) throws TencentCloudSDKException
+	public BaseResult citicRunInstances(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
 	{
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
-		ReqParamUtil.jsonStrToMap(reqMap, params);
+		ReqParamUtil.jsonObjectToMap(reqMap, params);
 		
 		//生成腾讯鉴权
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);

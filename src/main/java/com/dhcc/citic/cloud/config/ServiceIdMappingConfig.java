@@ -35,6 +35,36 @@ public class ServiceIdMappingConfig {
 	private Map<String, String> productIds = new HashMap<>();
 	private Map<String, String> urlCodes = new HashMap<>();
 	
+	/**
+	 * 根据中信商品ID取得对应的腾讯产品ID
+	 * @param serviceId
+	 * @return
+	 */
+	public String getProductId(String serviceId)
+	{
+		return productIds.get(serviceId);
+	}
+	
+	/**
+	 * 根据中信商品ID取得对应的腾讯产品接口地址前缀
+	 * @param serviceId
+	 * @return
+	 */
+	public String getUrlCodeByServiceId(String serviceId)
+	{
+		return urlCodes.get(productIds.get(serviceId));
+	}
+	
+	/**
+	 * 根据腾讯的产品ID取得对应的产品接口地址前缀
+	 * @param productId
+	 * @return
+	 */
+	public String getUrlCodeByProductId(String productId)
+	{
+		return urlCodes.get(productId);
+	}
+	
 	public String getUrlSuffixV2()
 	{
 		return urlSuffixV2;
@@ -85,7 +115,7 @@ public class ServiceIdMappingConfig {
 			}
 		}
 	}
-	public Map<String, String> getProductIds()
+/*	public Map<String, String> getProductIds()
 	{
 		return productIds;
 	}
@@ -100,5 +130,5 @@ public class ServiceIdMappingConfig {
 	public void setUrlCodes(Map<String, String> urlCodes)
 	{
 		this.urlCodes = urlCodes;
-	}
+	}*/
 }

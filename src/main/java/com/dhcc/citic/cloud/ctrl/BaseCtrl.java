@@ -8,11 +8,9 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -69,8 +67,7 @@ public class BaseCtrl {
      * 获取表单格式数据(或url拼接参数)
      * @return
      */
-    @SuppressWarnings("rawtypes")
-    public Map getParameterMap(){
+    public Map<String,String[]> getParameterMap(){
         return this.getRequest().getParameterMap();
     }
     

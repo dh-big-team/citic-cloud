@@ -1,8 +1,8 @@
 package com.dhcc.citic.cloud.service.impl;
 
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.service.CvmService;
@@ -33,8 +33,6 @@ public class ServiceManagerImpl implements ServiceManager
 	@Autowired
 	private CvmService cvmService;
 	
-	/*Map<String, String> productIds = serviceIdMappingConfig.getProductIds();
-	Map<String, String> urlCodes = serviceIdMappingConfig.getUrlCodes();*/
 	/**
 	 * 查询实例列表业务分发
 	 * @param serviceId
@@ -43,14 +41,13 @@ public class ServiceManagerImpl implements ServiceManager
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult doSelectList(String serviceId, String orgId, String params) throws TencentCloudSDKException
+	public BaseResult doSelectList(String serviceId, String orgId, JSONObject params) throws TencentCloudSDKException
 	{
-		Map<String, String> productIds = serviceIdMappingConfig.getProductIds();
-		Map<String, String> urlCodes = serviceIdMappingConfig.getUrlCodes();
 		//获取腾讯对应的产品
-		String productId = productIds.get(serviceId);
+		String productId = serviceIdMappingConfig.getProductId(serviceId);
 		//获取域名前缀
-		String urlcode = urlCodes.get(productId);
+		String urlcode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
+		
 		switch (productId)
 		{
 		case "cvm":
@@ -77,20 +74,13 @@ public class ServiceManagerImpl implements ServiceManager
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult doCreate(String serviceId, String orgId, String params) throws TencentCloudSDKException
+	public BaseResult doCreate(String serviceId, String orgId, JSONObject params) throws TencentCloudSDKException
 	{
-		Map<String, String> productIds = serviceIdMappingConfig.getProductIds();
-		Map<String, String> urlCodes = serviceIdMappingConfig.getUrlCodes();
-		for (String key : productIds.keySet())
-		{
-			System.out.println(key+"==========="+productIds.get(key));
-		}
 		//获取腾讯对应的产品
-		String productId = productIds.get(serviceId);
-		System.out.println("serviceId==="+serviceId);
-		System.out.println("productId==="+productId);
+		String productId = serviceIdMappingConfig.getProductId(serviceId);
 		//获取域名前缀
-		String urlcode = urlCodes.get(productId);
+		String urlcode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
+		
 		switch (productId)
 		{
 		case "cvm":
@@ -117,14 +107,13 @@ public class ServiceManagerImpl implements ServiceManager
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult doUpdate(String serviceId, String orgId, String params) throws TencentCloudSDKException
+	public BaseResult doUpdate(String serviceId, String orgId, JSONObject params) throws TencentCloudSDKException
 	{
-		Map<String, String> productIds = serviceIdMappingConfig.getProductIds();
-		Map<String, String> urlCodes = serviceIdMappingConfig.getUrlCodes();
 		//获取腾讯对应的产品
-		String productId = productIds.get(serviceId);
+		String productId = serviceIdMappingConfig.getProductId(serviceId);
 		//获取域名前缀
-		String urlcode = urlCodes.get(productId);
+		String urlcode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
+		
 		switch (productId)
 		{
 		case "cvm":
