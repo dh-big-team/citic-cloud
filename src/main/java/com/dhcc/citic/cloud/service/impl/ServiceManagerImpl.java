@@ -11,7 +11,7 @@ import com.dhcc.citic.cloud.service.ServiceManager;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称		        业务分发类
+ * 类名称		        业务分发实现类
  * 文件名称:     ServiceManager.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman

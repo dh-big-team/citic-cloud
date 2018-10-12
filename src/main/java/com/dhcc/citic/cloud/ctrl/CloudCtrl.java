@@ -14,6 +14,23 @@ import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.service.ServiceManager;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
+/**
+ * 
+ * 类名称		       中信云适配器控制器
+ * 文件名称:     CloudCtrl.java
+ * 内容摘要: 
+ * @author:   Zhao Xiaoman
+ * @version:  1.0  
+ * @Date:     2018年10月12日下午5:15:55
+ * 
+ * 修改历史:  
+ * 修改日期                     修改人员                                   版本	            修改内容  
+ * ----------------------------------------------  
+ * 2018年10月12日   Zhao Xiaoman       1.0       新建
+ *
+ * 版权:   版权所有(C)2018
+ * 公司:   东华云计算有限公司
+ */
 @RestController
 @RequestMapping(value = "/qcloud",produces = "application/json;charset=UTF-8")
 public class CloudCtrl extends BaseCtrl{
@@ -37,6 +54,10 @@ public class CloudCtrl extends BaseCtrl{
 		String limit = reqMap.get("pageSize")[0];
 		String orgId = reqMap.get("orgId")[0];		
 		String serviceId = reqMap.get("serviceId")[0];
+		
+		//对pageIndex、limit设定默认值
+		pageIndex = pageIndex == null?"0":pageIndex;
+		limit = limit == null?"20":limit;
 		
 		//中信和腾讯的起始页相差1
 		Integer offset = Integer.parseInt(pageIndex)-1;

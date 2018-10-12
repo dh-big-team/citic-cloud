@@ -5,7 +5,7 @@ import com.dhcc.citic.cloud.common.BaseResult;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称
+ * 类名称		       业务分发接口类
  * 文件名称:     ServiceManager.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman
@@ -18,7 +18,7 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  * 2018年10月11日   Zhao Xiaoman       1.0       新建
  *
  * 版权:   版权所有(C)2018
- * 公司:   
+ * 公司:   东华云计算有限公司
  */
 public interface ServiceManager
 {
