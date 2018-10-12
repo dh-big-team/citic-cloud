@@ -146,6 +146,27 @@ public class ApiRequest{
     }
     
     /**
+     * 构造client(针对个别api要求的参数与常规api传的值不同，特殊参数较多的情况建议用这个)
+     * 比如mysql的apiVersion要求的值是2018-03-20，其它大部分都可以传2017-03-12
+     * @param endpoint   api地址
+     * @param version    api版本
+     * @param path       api路径(/或/v2/index)
+     * @param credential 秘钥相关
+     * @param region     区域(默认ap-guangzhou)
+     */
+    public ApiRequest(String endpoint,String path,Credential credential, 
+    		String region,String sdkVersion,String apiVersion) {
+    	this.credential = credential;
+		this.profile = new ClientProfile();
+		this.endpoint = endpoint;
+		this.region = region;
+		this.path = path;
+		this.apiVersion = apiVersion;
+		this.sdkVersion = sdkVersion;
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    }
+    
+    /**
      * 构造client(3.0以下版本且区域自定义建议用这个)
      * @param endpoint   api地址
      * @param version    api版本
