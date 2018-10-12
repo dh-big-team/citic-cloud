@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.service.CvmService;
+import com.dhcc.citic.cloud.service.MysqlService;
 import com.dhcc.citic.cloud.service.ServiceManager;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
@@ -32,6 +33,8 @@ public class ServiceManagerImpl implements ServiceManager
 	ServiceIdMappingConfig serviceIdMappingConfig;
 	@Autowired
 	private CvmService cvmService;
+	@Autowired
+	private MysqlService mysqlService;
 	
 	/**
 	 * 查询实例列表业务分发
@@ -55,7 +58,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "cbs":
 			return null;
 		case "mysql":
-			return null;
+			return mysqlService.citicDescribeDBInstances(urlcode, orgId, params);
 		case "nat":
 			return null;
 		case "vpn":

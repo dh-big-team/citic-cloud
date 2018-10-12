@@ -1,6 +1,7 @@
 package com.dhcc.citic.cloud.service.impl;
 
 import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,20 +48,20 @@ public class MysqlServiceImpl implements MysqlService{
 	 * @throws TencentCloudSDKException
 	 */
 	@Override
-	public BaseResult citicDescribeDBInstances(String urlCode, String orgId, String params)
+	public BaseResult citicDescribeDBInstances(String urlcode, String orgId, JSONObject params)
 			throws TencentCloudSDKException {
 		//json格式的请求参数转为一符合腾讯api格式的一维map
 		HashMap<String, String> reqMap = new HashMap<String, String>();
-		ReqParamUtil.jsonStrToMap(reqMap, params);
+		ReqParamUtil.jsonObjectToMap(reqMap, params);
 		//获取用户临时秘钥信息
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		//构造认证类(tmpSecretId,tmpSecretKey,sessionToken)
 		//如果传入的是用户临时信息，则此处需要传入sessionToken，否则传入secretId、secretKey即可
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		//组合接口域名
-		String endPoint = urlCode + serviceIdMappingConfig.getUrlSuffixV3();
+		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
 		//构造请求client
-		ApiRequest req = new ApiRequest(endPoint, cred);
+		ApiRequest req = new ApiRequest(endPoint,"/",cred,"ap-guangzhou","SDK_JAVA_3.0.8","2017-03-20");
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeDBInstances");
 		//将数据包装成中信要求的格式
