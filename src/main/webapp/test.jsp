@@ -8,6 +8,7 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 
+
 <body>
 <script type="text/javascript">
 var basePath = "/cloud/";

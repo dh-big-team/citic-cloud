@@ -28,6 +28,7 @@ public class CbsServiceImpl implements  CbsService{
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeDisks");
 		return new BaseResult(rep);
+		
 	}
 
 }

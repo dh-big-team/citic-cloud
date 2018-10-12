@@ -22,6 +22,7 @@ public class CbsApi extends BaseCtrl {
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
+	
 	@RequestMapping(value = "/DescribeDisks",produces = "application/json;charset=UTF-8")
 	public BaseResult apiDescribeDisks(@RequestBody String jsonParam) throws TencentCloudSDKException{
 		JSONObject jsonObj = JSONObject.parseObject(jsonParam);
