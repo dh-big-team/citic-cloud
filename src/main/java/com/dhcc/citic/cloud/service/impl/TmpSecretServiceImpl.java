@@ -56,7 +56,7 @@ public class TmpSecretServiceImpl implements TmpSecretService{
 			return tmpSecretMaps.get(qcloudUin);
 		}
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest req = new ApiRequest("sts.api.qcloud.com","2017-03-12","/v2/index.php", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest("sts.api.qcloud.com","/v2/index.php", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		//角色标识

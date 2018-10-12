@@ -42,16 +42,13 @@ import com.tencentcloudapi.common.profile.HttpProfile;
  * 公司:   东华云计算有限公司
  */
 public class ApiRequest{
-	
-	public static final int HTTP_RSP_OK = 200;    
-    public static final String SDK_VERSION = "SDK_JAVA_3.0.8";  
     
 	private Credential credential;
 	private ClientProfile profile;
 	private String endpoint= "cvm.tencentcloudapi.com";
 	private String region= "ap-guangzhou";
-	private String path;
-    private String sdkVersion;
+	private String path="/";
+    private String sdkVersion="SDK_JAVA_3.0.8";
     private String apiVersion="2017-03-12";
     public Gson gson;
     
@@ -105,29 +102,63 @@ public class ApiRequest{
 	}
 	
 	/**
-     * 构造client
-     * @param credential 认证信息实例
-     * @param region	产品地域
+     * 构造client(3.0版且区域传默认值ap-guangzhou建议用这个)
+     * @param endpoint   api地址
+     * @param credential 秘钥相关
      */
-    public ApiRequest(String endpoint,String version,Credential credential, String region) {
+	public ApiRequest(String endpoint,Credential credential){
+		this.credential = credential;
+		this.profile = new ClientProfile();
+		this.endpoint = endpoint;
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	}
+	
+	/**
+     * 构造client(3.0版且区域自定义建议用这个)
+     * @param endpoint   api地址
+     * @param version    api版本
+     * @param credential 秘钥相关
+     * @param region     区域(默认ap-guangzhou)
+     */
+    public ApiRequest(String endpoint,Credential credential, String region) {
     	this.credential = credential;
 		this.profile = new ClientProfile();
 		this.endpoint = endpoint;
 		this.region = region;
-		this.path = "/";
-		this.sdkVersion = AbstractClient.SDK_VERSION;
-		this.apiVersion = version;
 		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
     
-    public ApiRequest(String endpoint,String version,String path,Credential credential, String region) {
+    /**
+     * 构造client(3.0以下版本且区域传默认值ap-guangzhou建议用这个)
+     * @param endpoint   api地址
+     * @param version    api版本
+     * @param path       api路径(/或/v2/index)
+     * @param credential 秘钥相关
+     * @param region     区域(默认ap-guangzhou)
+     */
+    public ApiRequest(String endpoint,String path,Credential credential) {
+    	this.credential = credential;
+		this.profile = new ClientProfile();
+		this.endpoint = endpoint;
+		this.path = path;
+		this.sdkVersion = AbstractClient.SDK_VERSION;
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    }
+    
+    /**
+     * 构造client(3.0以下版本且区域自定义建议用这个)
+     * @param endpoint   api地址
+     * @param version    api版本
+     * @param path       api路径(/或/v2/index)
+     * @param credential 秘钥相关
+     * @param region     区域(默认ap-guangzhou)
+     */
+    public ApiRequest(String endpoint,String path,Credential credential, String region) {
     	this.credential = credential;
 		this.profile = new ClientProfile();
 		this.endpoint = endpoint;
 		this.region = region;
 		this.path = path;
-		this.sdkVersion = AbstractClient.SDK_VERSION;
-		this.apiVersion = version;
 		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
     

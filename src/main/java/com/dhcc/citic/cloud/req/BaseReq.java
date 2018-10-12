@@ -146,7 +146,7 @@ public class BaseReq {
      * @return
      */
     public ApiRequest createApiRequest(){
-		return new ApiRequest(endpoint,apiVersion,path,cred,region);
+		return new ApiRequest(endpoint,path,cred);
     }
 
 	public String getEndpoint() {

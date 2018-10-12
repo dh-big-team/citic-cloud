@@ -48,7 +48,7 @@ public class AcountApi extends BaseCtrl{
 	public BaseResult apiDescribeInstances(@RequestBody String recvParam) throws TencentCloudSDKException{
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret("100007839763");
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
-		ApiRequest req = new ApiRequest("account.api.qcloud.com","2017-03-12","/v2/index.php", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest("account.api.qcloud.com","/v2/index.php", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		ReqParamUtil.jsonStrToMap(reqParam, recvParam);
@@ -65,7 +65,7 @@ public class AcountApi extends BaseCtrl{
 	@RequestMapping(value = "/user")
 	public BaseResult addChildUser(@RequestBody String recvParam) throws TencentCloudSDKException{
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest req = new ApiRequest("cam.api.qcloud.com","2017-03-12","/v2/index.php", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest("cam.api.qcloud.com","/v2/index.php", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		ReqParamUtil.jsonStrToMap(reqParam, recvParam);
@@ -82,7 +82,7 @@ public class AcountApi extends BaseCtrl{
 	@RequestMapping(value = "/private/user")
 	public BaseResult addPrivateChildUser(@RequestBody String recvParam) throws TencentCloudSDKException{
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest req = new ApiRequest("open.api.qcloud.com","2017-03-12","/v2/index.php", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest("open.api.qcloud.com","/v2/index.php", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		ReqParamUtil.jsonStrToMap(reqParam, recvParam);
