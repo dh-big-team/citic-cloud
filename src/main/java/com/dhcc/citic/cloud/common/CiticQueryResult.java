@@ -1,4 +1,4 @@
-package com.dhcc.citic.cloud.model;
+package com.dhcc.citic.cloud.common;
 
 import java.util.Map;
 import com.alibaba.fastjson.JSON;
@@ -21,12 +21,12 @@ public class CiticQueryResult
 	 * @param reqMap 接口请求参数
 	 * @param rep	接口返回数据
 	 */
-	public CiticQueryResult(Map<String, String> reqMap,JSONObject rep){
+	public CiticQueryResult(Map<String, String> reqMap,JSONObject rep,String code){
 		Integer limit = Integer.parseInt(reqMap.get("Limit"));
 		this.currentPage = Integer.parseInt(reqMap.get("Offset"))+1;
-		this.data = rep.getJSONArray("InstanceSet");
+		this.data = rep.getJSONArray(code);
 		this.totalCount = rep.getInteger("TotalCount");
-		this.totalPage = (int) Math.ceil((double)totalCount/(double)limit);
+		this.totalPage = (totalCount-1)/limit+1;
 	}
 	
 	/**

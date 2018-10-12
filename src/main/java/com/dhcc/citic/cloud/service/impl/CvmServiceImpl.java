@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
+import com.dhcc.citic.cloud.common.CiticQueryResult;
 import com.dhcc.citic.cloud.config.QcloudConfig;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
-import com.dhcc.citic.cloud.model.CiticQueryResult;
 import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
 import com.dhcc.citic.cloud.service.CvmService;
@@ -61,7 +61,7 @@ public class CvmServiceImpl implements CvmService
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeInstances");
 		
 		//将数据包装成中信要求的格式
-		CiticQueryResult result = new CiticQueryResult(reqMap,rep);
+		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"InstanceSet");
 				
 		return new BaseResult(result);
 	}
@@ -84,6 +84,8 @@ public class CvmServiceImpl implements CvmService
 		
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "RunInstances");
+		
+		
 		return new BaseResult(rep);
 	}
 }
