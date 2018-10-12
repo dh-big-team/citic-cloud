@@ -109,10 +109,10 @@ public class ApiCtrl extends BaseCtrl{
 	 * @throws TencentCloudSDKException 
 	 */
 	@RequestMapping(value = "/DescribeRegions")
-	public BaseResult test2(String uin) throws TencentCloudSDKException{
+	public BaseResult describeRegions(String uin) throws TencentCloudSDKException{
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(uin);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
-		ApiRequest req = new ApiRequest("cvm.tencentcloudapi.com","2017-03-12", cred, "ap-guangzhou");
+		ApiRequest req = new ApiRequest("cvm.tencentcloudapi.com", cred);
 		JSONObject rep = req.recvResponseRequest(new HashMap<String,String>(), "DescribeRegions");
 		return new BaseResult(rep);
 	}
