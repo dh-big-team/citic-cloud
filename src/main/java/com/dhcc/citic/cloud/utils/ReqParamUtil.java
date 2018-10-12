@@ -17,6 +17,8 @@ import com.alibaba.fastjson.JSONObject;
  * 修改日期                     修改人员                                   版本	            修改内容  
  * ----------------------------------------------  
  * 2018年10月11日     Zeng Dongcheng   1.0     新建
+ * 2018年10月12日     Zeng Dongcheng   1.1	
+ * 修改jsonStrToMap和jsonObjectToMap方法增加object为空判断，否则传入到腾讯侧的参数可能会报错
  *
  * 版权:   版权所有(C)2018
  * 公司:   东华云计算有限公司
@@ -24,40 +26,46 @@ import com.alibaba.fastjson.JSONObject;
 public class ReqParamUtil {
 	
 	/**
-	 * 将json字符串转为腾讯api要求格式的map
-	 * @param jsonStr
-	 * @return
+	 * @Description:将json字符串转为腾讯api要求格式的map
+	 * @param paramMap  用于接收转换结果的map
+	 * @param jsonStr   待转换的json对象
 	 */
 	public static void jsonStrToMap(HashMap<String,String> paramMap,String jsonStr){
 		JSONObject json = JSONObject.parseObject(jsonStr);
 		Set<String> it = json.keySet();
 		for(String key : it){
 			Object obj = json.get(key);
-			//首字母大写处理
-			key = key.substring(0, 1).toUpperCase() + key.substring(1);
-			if(obj instanceof JSONObject || obj instanceof JSONArray){
-				ReqParamUtil.relaxJsonStr(obj, key, paramMap); 
-			}else{
-				paramMap.put(key, String.valueOf(obj));
+			//如果key对应的value为空，则不填装到map
+			if(obj!=null){
+				//首字母大写处理
+				key = key.substring(0, 1).toUpperCase() + key.substring(1);
+				if(obj instanceof JSONObject || obj instanceof JSONArray){
+					ReqParamUtil.relaxJsonStr(obj, key, paramMap); 
+				}else{
+					paramMap.put(key, String.valueOf(obj));
+				}
 			}
 		}
 	}
 	
 	/**
-	 * 将jsonobject转为腾讯api要求格式的map
-	 * @param jsonStr
-	 * @return
+	 * @Description:将jsonobject转为腾讯api要求格式的map
+	 * @param paramMap  用于接收转换结果的map
+	 * @param jsonParam 待转换的json对象
 	 */
 	public static void jsonObjectToMap(HashMap<String,String> paramMap,JSONObject jsonParam){
 		Set<String> it = jsonParam.keySet();
 		for(String key : it){
 			Object obj = jsonParam.get(key);
-			//首字母大写处理
-			key = key.substring(0, 1).toUpperCase() + key.substring(1);
-			if(obj instanceof JSONObject || obj instanceof JSONArray){
-				ReqParamUtil.relaxJsonStr(obj, key, paramMap); 
-			}else{
-				paramMap.put(key, String.valueOf(obj));
+			//如果key对应的value为空，则不填装到map
+			if(obj!=null){
+				//首字母大写处理
+				key = key.substring(0, 1).toUpperCase() + key.substring(1);
+				if(obj instanceof JSONObject || obj instanceof JSONArray){
+					ReqParamUtil.relaxJsonStr(obj, key, paramMap); 
+				}else{
+					paramMap.put(key, String.valueOf(obj));
+				}
 			}
 		}
 	}
