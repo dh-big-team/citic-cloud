@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
+import com.dhcc.citic.cloud.service.CbsService;
 import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.MysqlService;
 import com.dhcc.citic.cloud.service.ServiceManager;
@@ -35,6 +36,8 @@ public class ServiceManagerImpl implements ServiceManager
 	private CvmService cvmService;
 	@Autowired
 	private MysqlService mysqlService;
+	@Autowired
+	private CbsService cbsService;
 	
 	/**
 	 * 查询实例列表业务分发
@@ -56,7 +59,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "cvm":
 			return cvmService.citicDescribeInstances(urlcode, orgId, params);
 		case "cbs":
-			return null;
+			return cbsService.citicDescribeDisks(urlcode, orgId, params);
 		case "mysql":
 			return mysqlService.citicDescribeDBInstances(urlcode, orgId, params);
 		case "nat":
