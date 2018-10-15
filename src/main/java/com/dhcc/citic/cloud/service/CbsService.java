@@ -11,6 +11,7 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  * @version:  1.0  
  * @Date:     2018年10月15日
  * 
+ * 
  * 修改历史:  
  * 修改日期                     修改人员                                   版本	            修改内容  
  * ----------------------------------------------  

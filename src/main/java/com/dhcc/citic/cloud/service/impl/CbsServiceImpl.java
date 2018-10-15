@@ -32,6 +32,7 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  * 版权:   版权所有(C)2018
  * 公司:   东华云计算有限公司
  */
+
 @Service("cbsService")
 public class CbsServiceImpl implements  CbsService{
 	@Autowired
