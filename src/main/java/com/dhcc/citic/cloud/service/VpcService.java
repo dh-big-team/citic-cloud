@@ -24,22 +24,20 @@ public interface VpcService
 {
 	/**
 	 * 查询VPC网关实例列表
-	 * @param serviceId
-	 * @param userId
+	 * @param orgId
 	 * @param params
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	public BaseResult describeVpcs(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeVpcs(String orgId,JSONObject params) throws TencentCloudSDKException;
 	/**
 	 * 创建VPC网关实例
-	 * @param serviceId
-	 * @param userId
+	 * @param orgId
 	 * @param params
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult createVpc(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult createVpc(String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 
 }

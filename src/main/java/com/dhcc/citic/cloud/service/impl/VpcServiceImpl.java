@@ -45,7 +45,7 @@ public class VpcServiceImpl implements VpcService
 	TmpSecretService tmpSecretService;
 	
 	@Override
-	public BaseResult describeVpcs(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
+	public BaseResult describeVpcs(String orgId, JSONObject params) throws TencentCloudSDKException
 	{
 		//将公用的参数名称instanceIds，改为VPC中对应的参数名称vpcIds
 		String vpcIds = params.getString("instanceIds");
@@ -60,12 +60,11 @@ public class VpcServiceImpl implements VpcService
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
-		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
+		//构造请求client
+		ApiRequest req = new ApiRequest("DescribeVpcs",cred);
 		
 		//调用腾讯接口
-		ApiRequest req = new ApiRequest(endPoint, cred);
-		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeVpcs");
+		JSONObject rep = req.recvResponseRequest(reqMap);
 		
 		//将数据包装成中信要求的格式
 		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"VpcSet");
@@ -74,7 +73,7 @@ public class VpcServiceImpl implements VpcService
 	}
 
 	@Override
-	public BaseResult createVpc(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
+	public BaseResult createVpc(String orgId,JSONObject params) throws TencentCloudSDKException
 	{
 		//将结构数据转化为一维字符串MAP
 		HashMap<String, String> reqMap = new HashMap<String, String>();
@@ -84,15 +83,12 @@ public class VpcServiceImpl implements VpcService
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
-		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
-		
-		ApiRequest req = new ApiRequest(endPoint, cred);
+		//构造请求client
+		ApiRequest req = new ApiRequest("CreateVpc",cred);
 		
 		//调用腾讯接口
-		JSONObject rep = req.recvResponseRequest(reqMap, "CreateVpc");
-		
-		
+		JSONObject rep = req.recvResponseRequest(reqMap);
+				
 		return new BaseResult(rep);
 	}
 }

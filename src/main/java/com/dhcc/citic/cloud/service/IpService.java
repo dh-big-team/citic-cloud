@@ -24,22 +24,20 @@ public interface IpService
 {
 	/**
 	 * 查询弹性公网IP实例列表
-	 * @param serviceId
-	 * @param userId
+	 * @param orgId
 	 * @param params
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	public BaseResult describeAddresses(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeAddresses(String orgId,JSONObject params) throws TencentCloudSDKException;
 	/**
 	 * 创建弹性公网IP实例
-	 * @param serviceId
-	 * @param userId
+	 * @param orgId
 	 * @param params
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult allocateAddresses(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult allocateAddresses(String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 
 }

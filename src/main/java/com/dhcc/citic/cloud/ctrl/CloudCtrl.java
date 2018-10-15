@@ -107,6 +107,8 @@ public class CloudCtrl extends BaseCtrl{
 		JSONObject params = jsonParam.getJSONObject("params");
 		String serviceId = (String) jsonParam.get("serviceId");
 		String orgId = citicInfo.getString("orgId");
+		String instanceId = citicInfo.getString("instanceId");
+		String operationType = citicInfo.getString("operationType");
 		//暂时用不到
 		/*JSONObject otherInfo = jsonParam.getJSONObject("otherInfo");
 		String instanceId = (String) jsonParam.get("instanceId");		

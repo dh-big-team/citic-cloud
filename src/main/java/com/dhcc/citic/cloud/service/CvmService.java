@@ -24,22 +24,20 @@ public interface CvmService
 {
 	/**
 	 * 查询云服务器实例列表
-	 * @param serviceId
-	 * @param userId
+	 * @param orgId
 	 * @param params
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	public BaseResult describeInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeInstances(String orgId,JSONObject params) throws TencentCloudSDKException;
 	/**
 	 * 创建云服务器实例
-	 * @param serviceId
-	 * @param userId
+	 * @param orgId
 	 * @param params
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult runInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult runInstances(String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 
 }
