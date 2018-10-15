@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
+import com.dhcc.citic.cloud.common.CiticQueryResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.model.TmpSecret;
 import com.dhcc.citic.cloud.req.ApiRequest;
@@ -41,14 +42,14 @@ public class MysqlServiceImpl implements MysqlService{
 	
 	/**
 	 * @Description:查询mysql实例列表
-	 * @param urlCode
-	 * @param orgId
-	 * @param params
+	 * @param urlCode 地址前缀
+	 * @param orgId   中信侧的租户id,对应腾讯侧qcloudUin
+	 * @param params  json格式的请求参数
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
 	@Override
-	public BaseResult citicDescribeDBInstances(String urlcode, String orgId, JSONObject params)
+	public BaseResult describeDBInstances(String urlcode, String orgId, JSONObject params)
 			throws TencentCloudSDKException {
 		//json格式的请求参数转为一符合腾讯api格式的一维map
 		HashMap<String, String> reqMap = new HashMap<String, String>();
@@ -64,8 +65,31 @@ public class MysqlServiceImpl implements MysqlService{
 		ApiRequest req = new ApiRequest(endPoint,"/",cred,"ap-guangzhou","SDK_JAVA_3.0.8","2017-03-20");
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeDBInstances");
+		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"Items");
 		//将数据包装成中信要求的格式
-		return new BaseResult(rep);
+		return new BaseResult(result);
+	}
+
+	/**
+	 * @Description:  创建mysql实例(包年包月)
+	 * @param urlCode 地址前缀
+	 * @param orgId   中信侧的租户id,对应腾讯侧qcloudUin
+	 * @param params  json格式的请求参数
+	 * @return
+	 * @throws TencentCloudSDKException
+	 */
+	@Override
+	public BaseResult createDBInstance(String urlCode, String orgId, JSONObject params)
+			throws TencentCloudSDKException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BaseResult createDBInstanceHour(String urlCode, String orgId, JSONObject params)
+			throws TencentCloudSDKException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
