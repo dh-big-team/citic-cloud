@@ -56,7 +56,7 @@ public class TmpSecretServiceImpl implements TmpSecretService{
 			return tmpSecretMaps.get(qcloudUin);
 		}
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest req = new ApiRequest("sts.api.qcloud.com","/v2/index.php", cred);
+		ApiRequest req = new ApiRequest("AssumeRole", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		//角色标识
@@ -65,7 +65,7 @@ public class TmpSecretServiceImpl implements TmpSecretService{
 		reqParam.put("roleSessionName", "channelCUCC");
 		//过期时间（300s-7200s之间，不填默认为7200s)
 		reqParam.put("durationSeconds", "7200");
-		JSONObject rep = (JSONObject)req.recvCodeRequest(reqParam, "AssumeRole");
+		JSONObject rep = (JSONObject)req.recvCodeRequest(reqParam);
 		if(rep!=null && rep.get("credentials")!=null){
 			JSONObject creObj = rep.getJSONObject("credentials");
 			TmpSecret tmpSecret = new TmpSecret();

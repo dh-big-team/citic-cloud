@@ -36,6 +36,8 @@ public class PublicParamConfig {
 		publicParamMaps.put("AddUser", new PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
 		publicParamMaps.put("ChannelRegisterUser", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
 		publicParamMaps.put("ChannelGetLoginToken", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
+		//获取用户临时秘钥
+		publicParamMaps.put("AssumeRole", new PublicParam(ApiUrl.STS,ApiPath.V2,ApiVersion.V20170312));
 	}
 
 	
