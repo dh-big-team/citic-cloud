@@ -25,5 +25,5 @@ public interface CbsService {
 	 * @throws TencentCloudSDKException
 	 */
 	
-	public BaseResult describeDisks(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeDisks(String orgId,JSONObject params) throws TencentCloudSDKException;
 }

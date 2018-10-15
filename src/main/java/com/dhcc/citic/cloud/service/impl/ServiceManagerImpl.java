@@ -69,9 +69,9 @@ public class ServiceManagerImpl implements ServiceManager
 		case "cvm":
 			return cvmService.describeInstances(urlCode, orgId, params);
 		case "cbs":
-			return cbsService.describeDisks(urlCode, orgId, params);
+			return cbsService.describeDisks(orgId, params);
 		case "mysql":
-			return mysqlService.describeDBInstances(urlCode, orgId, params);
+			return mysqlService.describeDBInstances(orgId, params);
 		case "nat":
 			return null;
 		case "vpn":

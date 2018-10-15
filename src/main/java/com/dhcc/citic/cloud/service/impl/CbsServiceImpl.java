@@ -41,24 +41,18 @@ public class CbsServiceImpl implements  CbsService{
 	@Autowired
 	TmpSecretService tmpSecretService;
 	@Override
-	public BaseResult describeDisks(String urlCode,String orgId,JSONObject params)throws TencentCloudSDKException {
+	public BaseResult describeDisks(String orgId,JSONObject params)throws TencentCloudSDKException {
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
 		ReqParamUtil.jsonObjectToMap(reqMap, params);
-		
 		//生成腾讯鉴权
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
-
-		//组合接口域名
-		String endPoint = urlCode + serviceIdMappingConfig.getUrlSuffixV3();
-		//调用腾讯接口
-		ApiRequest req = new ApiRequest(endPoint, cred);
-		
-		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeDisks");
-		
+		//构造请求client
+		ApiRequest req = new ApiRequest("DescribeDisks", cred);
+		JSONObject rep = req.recvResponseRequest(reqMap);
+		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"DiskSet");
 		//将数据包装成中信要求的格式
-		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"DiskSet");	
 		return new BaseResult(result);
 		
 	}
