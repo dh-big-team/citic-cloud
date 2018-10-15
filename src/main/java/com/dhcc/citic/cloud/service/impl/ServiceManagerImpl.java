@@ -2,12 +2,14 @@ package com.dhcc.citic.cloud.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.MysqlService;
 import com.dhcc.citic.cloud.service.ServiceManager;
+import com.dhcc.citic.cloud.service.VpnService;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
@@ -35,6 +37,8 @@ public class ServiceManagerImpl implements ServiceManager
 	private CvmService cvmService;
 	@Autowired
 	private MysqlService mysqlService;
+	@Autowired
+	private VpnService vpnService;
 	
 	/**
 	 * 查询实例列表业务分发
@@ -49,20 +53,20 @@ public class ServiceManagerImpl implements ServiceManager
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
 		//获取域名前缀
-		String urlcode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
+		String urlCode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
 		
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.citicDescribeInstances(urlcode, orgId, params);
+			return cvmService.citicDescribeInstances(urlCode, orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":
-			return mysqlService.citicDescribeDBInstances(urlcode, orgId, params);
+			return mysqlService.citicDescribeDBInstances(urlCode, orgId, params);
 		case "nat":
 			return null;
 		case "vpn":
-			return null;
+			return vpnService.citicDescribeVpnGateways(urlCode, orgId, params);
 		case "IP":
 			return null;
 		default:
@@ -82,12 +86,12 @@ public class ServiceManagerImpl implements ServiceManager
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
 		//获取域名前缀
-		String urlcode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
+		String urlCode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
 		
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.citicRunInstances(urlcode, orgId, params);
+			return cvmService.citicRunInstances(urlCode, orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":
@@ -95,7 +99,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "nat":
 			return null;
 		case "vpn":
-			return null;
+			return vpnService.citicCreateVpnGateway(urlCode, orgId, params);
 		case "IP":
 			return null;
 		default:
