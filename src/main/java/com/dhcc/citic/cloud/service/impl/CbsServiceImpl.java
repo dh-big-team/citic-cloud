@@ -45,6 +45,7 @@ public class CbsServiceImpl implements  CbsService{
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
 		ReqParamUtil.jsonObjectToMap(reqMap, params);
+		
 		//生成腾讯鉴权
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
