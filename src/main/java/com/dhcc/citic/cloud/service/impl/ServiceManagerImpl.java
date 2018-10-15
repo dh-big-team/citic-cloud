@@ -62,7 +62,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "cbs":
 			return null;
 		case "mysql":
-			return mysqlService.citicDescribeDBInstances(urlCode, orgId, params);
+			return mysqlService.describeDBInstances(urlCode, orgId, params);
 		case "nat":
 			return null;
 		case "vpn":
