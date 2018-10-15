@@ -8,6 +8,7 @@ import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.service.CbsService;
 import com.dhcc.citic.cloud.service.CvmService;
+import com.dhcc.citic.cloud.service.IpService;
 import com.dhcc.citic.cloud.service.MysqlService;
 import com.dhcc.citic.cloud.service.ServiceManager;
 import com.dhcc.citic.cloud.service.VpcService;
@@ -45,6 +46,8 @@ public class ServiceManagerImpl implements ServiceManager
 	private VpnService vpnService;
 	@Autowired
 	private VpcService vpcService;
+	@Autowired
+	private IpService ipService;
 	
 	/**
 	 * 查询实例列表业务分发
@@ -74,7 +77,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "vpn":
 			return vpnService.describeVpnGateways(urlCode, orgId, params);
 		case "ip":
-			return null;
+			return ipService.describeAddresses(urlCode, orgId, params);
 		case "vpc":
 			return vpcService.describeVpcs(urlCode, orgId, params);
 		default:
@@ -109,7 +112,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "vpn":
 			return vpnService.createVpnGateway(urlCode, orgId, params);
 		case "ip":
-			return null;
+			return ipService.allocateAddresses(urlCode, orgId, params);
 		case "vpc":
 			return vpcService.createVpc(urlCode, orgId, params);
 		default:
