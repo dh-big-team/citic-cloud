@@ -10,5 +10,5 @@ public interface CbsService {
 	 * @throws TencentCloudSDKException
 	 */
 	
-	public BaseResult citicDescribeDisks(String serviceId,String userId,JSONObject jsonParam) throws TencentCloudSDKException;
+	public BaseResult citicDescribeDisks(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 }
