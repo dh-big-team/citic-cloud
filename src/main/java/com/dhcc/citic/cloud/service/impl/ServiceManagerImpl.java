@@ -10,6 +10,7 @@ import com.dhcc.citic.cloud.service.CbsService;
 import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.MysqlService;
 import com.dhcc.citic.cloud.service.ServiceManager;
+import com.dhcc.citic.cloud.service.VpcService;
 import com.dhcc.citic.cloud.service.VpnService;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
@@ -42,6 +43,8 @@ public class ServiceManagerImpl implements ServiceManager
 	private CbsService cbsService;
 	@Autowired
 	private VpnService vpnService;
+	@Autowired
+	private VpcService vpcService;
 	
 	/**
 	 * 查询实例列表业务分发
@@ -70,8 +73,10 @@ public class ServiceManagerImpl implements ServiceManager
 			return null;
 		case "vpn":
 			return vpnService.describeVpnGateways(urlCode, orgId, params);
-		case "IP":
+		case "ip":
 			return null;
+		case "vpc":
+			return vpcService.describeVpcs(urlCode, orgId, params);
 		default:
 			throw new TencentCloudSDKException("The serviceId is nonsupport!");
 		}
@@ -103,8 +108,10 @@ public class ServiceManagerImpl implements ServiceManager
 			return null;
 		case "vpn":
 			return vpnService.createVpnGateway(urlCode, orgId, params);
-		case "IP":
+		case "ip":
 			return null;
+		case "vpc":
+			return vpcService.createVpc(urlCode, orgId, params);
 		default:
 			throw new TencentCloudSDKException("The serviceId is nonsupport!");
 		}
@@ -122,12 +129,12 @@ public class ServiceManagerImpl implements ServiceManager
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
 		//获取域名前缀
-		String urlcode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
+		String urlCode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
 		
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.runInstances(urlcode, orgId, params);
+			return cvmService.runInstances(urlCode, orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":
@@ -136,7 +143,9 @@ public class ServiceManagerImpl implements ServiceManager
 			return null;
 		case "vpn":
 			return null;
-		case "IP":
+		case "ip":
+			return null;
+		case "vpc":
 			return null;
 		default:
 			throw new TencentCloudSDKException("The serviceId is nonsupport!");
