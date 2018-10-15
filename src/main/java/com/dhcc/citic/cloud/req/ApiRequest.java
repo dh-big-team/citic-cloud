@@ -148,6 +148,7 @@ public class ApiRequest{
      * @param credential  用户认证信息
      */
     public ApiRequest(String actionName,Credential credential) {
+    	this.actionName = actionName;
     	this.credential = credential;
 		this.profile = new ClientProfile();
 		PublicParamConfig.PublicParam param = PublicParamConfig.publicParamMaps.get(actionName);
@@ -164,6 +165,7 @@ public class ApiRequest{
      * @param region	     区域
      */
     public ApiRequest(String actionName,Credential credential,String region) {
+    	this.actionName = actionName;
     	this.credential = credential;
 		this.profile = new ClientProfile();
 		PublicParamConfig.PublicParam param = PublicParamConfig.publicParamMaps.get(actionName);
@@ -182,8 +184,9 @@ public class ApiRequest{
      * @param credential 秘钥相关
      * @param region     区域(默认ap-guangzhou)
      */
-    public ApiRequest(String endpoint,String path,Credential credential, 
+    public ApiRequest(String actionName,String endpoint,String path,Credential credential, 
     		String region,String apiVersion) {
+    	this.actionName = actionName;
     	this.credential = credential;
 		this.profile = new ClientProfile();
 		this.endpoint = endpoint;

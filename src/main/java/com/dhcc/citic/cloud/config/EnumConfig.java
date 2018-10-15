@@ -112,7 +112,8 @@ public class EnumConfig {
 		VPC2("vpc.api.qcloud.com"),
 		ACC("account.api.qcloud.com"),
 		CAM("cam.api.qcloud.com"),
-		OPEN("open.api.qcloud.com");
+		OPEN("open.api.qcloud.com"),
+		STS("sts.api.qcloud.com");
 		
 		private String url;
 		

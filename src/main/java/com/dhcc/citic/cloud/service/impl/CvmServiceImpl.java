@@ -43,9 +43,9 @@ public class CvmServiceImpl implements CvmService
 	TmpSecretService tmpSecretService;
 	
 	@Override
-	public BaseResult describeInstances(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
+	public BaseResult describeInstances(String orgId, JSONObject params) throws TencentCloudSDKException
 	{
-		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
+		//将结构类型数据，转化为一维MAP
 		HashMap<String, String> reqMap = new HashMap<String, String>();
 		ReqParamUtil.jsonObjectToMap(reqMap, params);
 		
@@ -53,12 +53,9 @@ public class CvmServiceImpl implements CvmService
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
-		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
-		
 		//调用腾讯接口
-		ApiRequest req = new ApiRequest(endPoint, cred);
-		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeInstances");
+		ApiRequest req = new ApiRequest("DescribeInstances",cred);
+		JSONObject rep = req.recvResponseRequest(reqMap);
 		
 		//将数据包装成中信要求的格式
 		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"InstanceSet");
@@ -67,7 +64,7 @@ public class CvmServiceImpl implements CvmService
 	}
 
 	@Override
-	public BaseResult runInstances(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
+	public BaseResult runInstances(String orgId,JSONObject params) throws TencentCloudSDKException
 	{
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
@@ -78,13 +75,10 @@ public class CvmServiceImpl implements CvmService
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
 		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
-		
-		ApiRequest req = new ApiRequest(endPoint, cred);
+		ApiRequest req = new ApiRequest("RunInstances",cred);
 		
 		//调用腾讯接口
-		JSONObject rep = req.recvResponseRequest(reqMap, "RunInstances");
-		
+		JSONObject rep = req.recvResponseRequest(reqMap);
 		
 		return new BaseResult(rep);
 	}

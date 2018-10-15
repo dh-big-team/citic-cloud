@@ -23,7 +23,6 @@ import com.dhcc.citic.cloud.config.EnumConfig.ApiVersion;
  * 公司:   东华云计算有限公司
  */
 public class PublicParamConfig {
-	
 	public static final Map<String,PublicParam> publicParamMaps= new HashMap<String,PublicParam>();
 	
 	static{
@@ -32,12 +31,37 @@ public class PublicParamConfig {
 		publicParamMaps.put("DescribeDisks", new PublicParam(ApiUrl.CBS,ApiPath.V1,ApiVersion.V20170312));
 		//mysql实例列表接口
 		publicParamMaps.put("DescribeDBInstances", new PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));
+		//云服务器
+		publicParamMaps.put("DescribeInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		publicParamMaps.put("RunInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));	//创建实例
+		
+		//云硬盘
+		publicParamMaps.put("DescribeDisks", new PublicParam(ApiUrl.CBS,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		
+		//云数据库MYSQL
+		publicParamMaps.put("DescribeDBInstances", new PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));	//查询实例列表
+		
+		//VPN网关
+		publicParamMaps.put("DescribeVpnGateways", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		publicParamMaps.put("CreateVpnGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//创建实例
+		
+		//私有网络VPC
+		publicParamMaps.put("DescribeVpcs", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		publicParamMaps.put("CreateVpc", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//创建实例
+		
+		//弹性公网IP
+		publicParamMaps.put("DescribeAddresses", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		publicParamMaps.put("AllocateAddresses", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//创建实例
+		
+		//NAT网关
 		publicParamMaps.put("DescribeNatGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		publicParamMaps.put("DescribeNatGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		publicParamMaps.put("DescribeProject", new PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
 		publicParamMaps.put("AddUser", new PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
 		publicParamMaps.put("ChannelRegisterUser", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
 		publicParamMaps.put("ChannelGetLoginToken", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
+		//获取用户临时秘钥
+		publicParamMaps.put("AssumeRole", new PublicParam(ApiUrl.STS,ApiPath.V2,ApiVersion.V20170312));
 	}
 
 	

@@ -28,12 +28,8 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "mapping")
 public class ServiceIdMappingConfig {
 	
-	private String urlSuffixV2;	//V2版本
-	private String urlSuffixV3;	//V3版本
 	private String serviceToProductId;	
-	private String productIdToUrlCode;
 	private Map<String, String> productIds = new HashMap<>();
-	private Map<String, String> urlCodes = new HashMap<>();
 	
 	/**
 	 * 根据中信商品ID取得对应的腾讯产品ID
@@ -44,43 +40,7 @@ public class ServiceIdMappingConfig {
 	{
 		return productIds.get(serviceId);
 	}
-	
-	/**
-	 * 根据中信商品ID取得对应的腾讯产品接口地址前缀
-	 * @param serviceId
-	 * @return
-	 */
-	public String getUrlCodeByServiceId(String serviceId)
-	{
-		return urlCodes.get(productIds.get(serviceId));
-	}
-	
-	/**
-	 * 根据腾讯的产品ID取得对应的产品接口地址前缀
-	 * @param productId
-	 * @return
-	 */
-	public String getUrlCodeByProductId(String productId)
-	{
-		return urlCodes.get(productId);
-	}
-	
-	public String getUrlSuffixV2()
-	{
-		return urlSuffixV2;
-	}
-	public void setUrlSuffixV2(String urlSuffixV2)
-	{
-		this.urlSuffixV2 = urlSuffixV2;
-	}
-	public String getUrlSuffixV3()
-	{
-		return urlSuffixV3;
-	}
-	public void setUrlSuffixV3(String urlSuffixV3)
-	{
-		this.urlSuffixV3 = urlSuffixV3;
-	}
+		
 	public String getServiceToProductId()
 	{
 		return serviceToProductId;
@@ -98,37 +58,4 @@ public class ServiceIdMappingConfig {
 			}
 		}
 	}
-	public String getProductIdToUrlCode()
-	{
-		return productIdToUrlCode;
-	}
-	public void setProductIdToUrlCode(String productIdToUrlCode)
-	{
-		this.productIdToUrlCode = productIdToUrlCode;
-		if (productIdToUrlCode != null)
-		{
-			String[] strings = productIdToUrlCode.split(",");
-			for (String string : strings)
-			{
-				String[] strs = string.split(":");
-				this.urlCodes.put(strs[0], strs[1]);
-			}
-		}
-	}
-/*	public Map<String, String> getProductIds()
-	{
-		return productIds;
-	}
-	public void setProductIds(Map<String, String> productIds)
-	{
-		this.productIds = productIds;
-	}
-	public Map<String, String> getUrlCodes()
-	{
-		return urlCodes;
-	}
-	public void setUrlCodes(Map<String, String> urlCodes)
-	{
-		this.urlCodes = urlCodes;
-	}*/
 }
