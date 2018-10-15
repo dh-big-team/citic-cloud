@@ -27,15 +27,15 @@ public class PublicParamConfig {
 	public static final Map<String,PublicParam> publicParamMaps= new HashMap<String,PublicParam>();
 	
 	static{
-		publicParamMaps.put("DescribeInstances", new PublicParamConfig.PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
-		publicParamMaps.put("DescribeDisks", new PublicParamConfig.PublicParam(ApiUrl.CBS,ApiPath.V1,ApiVersion.V20170312));
-		publicParamMaps.put("DescribeDBInstances", new PublicParamConfig.PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));
-		publicParamMaps.put("DescribeNatGateway", new PublicParamConfig.PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
-		publicParamMaps.put("DescribeNatGateway", new PublicParamConfig.PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
-		publicParamMaps.put("DescribeProject", new PublicParamConfig.PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
-		publicParamMaps.put("AddUser", new PublicParamConfig.PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
-		publicParamMaps.put("ChannelRegisterUser", new PublicParamConfig.PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
-		publicParamMaps.put("ChannelGetLoginToken", new PublicParamConfig.PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
+		publicParamMaps.put("DescribeInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
+		publicParamMaps.put("DescribeDisks", new PublicParam(ApiUrl.CBS,ApiPath.V1,ApiVersion.V20170312));
+		publicParamMaps.put("DescribeDBInstances", new PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));
+		publicParamMaps.put("DescribeNatGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
+		publicParamMaps.put("DescribeNatGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
+		publicParamMaps.put("DescribeProject", new PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
+		publicParamMaps.put("AddUser", new PublicParam(ApiUrl.ACC,ApiPath.V2,ApiVersion.V20170312));
+		publicParamMaps.put("ChannelRegisterUser", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
+		publicParamMaps.put("ChannelGetLoginToken", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
 	}
 
 	
