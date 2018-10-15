@@ -45,7 +45,7 @@ public class VpnServiceImpl implements VpnService
 	TmpSecretService tmpSecretService;
 	
 	@Override
-	public BaseResult citicDescribeVpnGateways(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
+	public BaseResult describeVpnGateways(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
 	{
 		//将公用的参数名称instanceIds，改为VPN中对应的参数名称vpnGatewayIds
 		String vpnGatewayIds = params.getString("instanceIds");
@@ -74,7 +74,7 @@ public class VpnServiceImpl implements VpnService
 	}
 
 	@Override
-	public BaseResult citicCreateVpnGateway(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
+	public BaseResult createVpnGateway(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
 	{
 		//将结构数据转化为一维字符串MAP
 		HashMap<String, String> reqMap = new HashMap<String, String>();

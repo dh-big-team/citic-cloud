@@ -43,7 +43,7 @@ public class CvmServiceImpl implements CvmService
 	TmpSecretService tmpSecretService;
 	
 	@Override
-	public BaseResult citicDescribeInstances(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
+	public BaseResult describeInstances(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
 	{
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
@@ -67,7 +67,7 @@ public class CvmServiceImpl implements CvmService
 	}
 
 	@Override
-	public BaseResult citicRunInstances(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
+	public BaseResult runInstances(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
 	{
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();

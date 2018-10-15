@@ -58,7 +58,7 @@ public class ServiceManagerImpl implements ServiceManager
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.citicDescribeInstances(urlCode, orgId, params);
+			return cvmService.describeInstances(urlCode, orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":
@@ -66,7 +66,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "nat":
 			return null;
 		case "vpn":
-			return vpnService.citicDescribeVpnGateways(urlCode, orgId, params);
+			return vpnService.describeVpnGateways(urlCode, orgId, params);
 		case "IP":
 			return null;
 		default:
@@ -91,7 +91,7 @@ public class ServiceManagerImpl implements ServiceManager
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.citicRunInstances(urlCode, orgId, params);
+			return cvmService.runInstances(urlCode, orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":
@@ -99,7 +99,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "nat":
 			return null;
 		case "vpn":
-			return vpnService.citicCreateVpnGateway(urlCode, orgId, params);
+			return vpnService.createVpnGateway(urlCode, orgId, params);
 		case "IP":
 			return null;
 		default:
@@ -124,7 +124,7 @@ public class ServiceManagerImpl implements ServiceManager
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.citicRunInstances(urlcode, orgId, params);
+			return cvmService.runInstances(urlcode, orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":

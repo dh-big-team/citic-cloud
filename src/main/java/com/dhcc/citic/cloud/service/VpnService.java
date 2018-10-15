@@ -30,7 +30,7 @@ public interface VpnService
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	public BaseResult citicDescribeVpnGateways(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeVpnGateways(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 	/**
 	 * 创建VPN网关实例
 	 * @param serviceId
@@ -39,7 +39,7 @@ public interface VpnService
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult citicCreateVpnGateway(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult createVpnGateway(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 
 }

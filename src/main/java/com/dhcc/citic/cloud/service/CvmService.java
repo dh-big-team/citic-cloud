@@ -30,7 +30,7 @@ public interface CvmService
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	public BaseResult citicDescribeInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 	/**
 	 * 创建云服务器实例
 	 * @param serviceId
@@ -39,7 +39,7 @@ public interface CvmService
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult citicRunInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult runInstances(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 
 }
