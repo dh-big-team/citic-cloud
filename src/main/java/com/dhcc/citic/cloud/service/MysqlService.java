@@ -29,7 +29,7 @@ public interface MysqlService {
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult describeDBInstances(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult describeDBInstances(String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 	/**
 	 * @Description:  创建mysql实例(包年包月)

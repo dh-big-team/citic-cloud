@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dhcc.citic.cloud.config.PublicParamConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -50,6 +51,7 @@ public class ApiRequest{
 	private String path="/";
     private String sdkVersion="SDK_JAVA_3.0.8";
     private String apiVersion="2017-03-12";
+    private String actionName;
     public Gson gson;
     
     /**
@@ -101,17 +103,28 @@ public class ApiRequest{
 		return this.credential;
 	}
 	
+	
+	
+	public String getActionName() {
+		return actionName;
+	}
+
+	public void setActionName(String actionName) {
+		this.actionName = actionName;
+	}
+
 	/**
      * 构造client(3.0版且区域传默认值ap-guangzhou建议用这个)
      * @param endpoint   api地址
      * @param credential 秘钥相关
      */
-	public ApiRequest(String endpoint,Credential credential){
-		this.credential = credential;
-		this.profile = new ClientProfile();
-		this.endpoint = endpoint;
-		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-	}
+//	public ApiRequest(String actionName,String endpoint,Credential credential){
+//		this.credential = credential;
+//		this.profile = new ClientProfile();
+//		this.endpoint = endpoint;
+//		this.actionName = actionName;
+//		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//	}
 	
 	/**
      * 构造client(3.0版且区域自定义建议用这个)
@@ -120,34 +133,49 @@ public class ApiRequest{
      * @param credential 秘钥相关
      * @param region     区域(默认ap-guangzhou)
      */
-    public ApiRequest(String endpoint,Credential credential, String region) {
+//    public ApiRequest(String actionName,String endpoint,Credential credential, String region) {
+//    	this.credential = credential;
+//		this.profile = new ClientProfile();
+//		this.endpoint = endpoint;
+//		this.region = region;
+//		this.actionName = actionName;
+//		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//    }
+    
+    /**
+     * 构造请求request(区域传默认值ap-guangzhou建议用这个)
+     * @param actionName  腾讯侧api的接口名称
+     * @param credential  用户认证信息
+     */
+    public ApiRequest(String actionName,Credential credential) {
     	this.credential = credential;
 		this.profile = new ClientProfile();
-		this.endpoint = endpoint;
+		PublicParamConfig.PublicParam param = PublicParamConfig.publicParamMaps.get(actionName);
+		this.endpoint = param.getApiUrl();
+		this.path = param.getApiPath();
+		this.apiVersion = param.getApiVersion();
+		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    }
+    
+    /**
+     * 构造请求request(自定义区域)
+     * @param actionName  腾讯侧api的接口名称
+     * @param credential  用户认证信息
+     * @param region	     区域
+     */
+    public ApiRequest(String actionName,Credential credential,String region) {
+    	this.credential = credential;
+		this.profile = new ClientProfile();
+		PublicParamConfig.PublicParam param = PublicParamConfig.publicParamMaps.get(actionName);
+		this.endpoint = param.getApiUrl();
+		this.path = param.getApiPath();
+		this.apiVersion = param.getApiVersion();
 		this.region = region;
 		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
     
     /**
-     * 构造client(3.0以下版本且区域传默认值ap-guangzhou建议用这个)
-     * @param endpoint   api地址
-     * @param version    api版本
-     * @param path       api路径(/或/v2/index)
-     * @param credential 秘钥相关
-     * @param region     区域(默认ap-guangzhou)
-     */
-    public ApiRequest(String endpoint,String path,Credential credential) {
-    	this.credential = credential;
-		this.profile = new ClientProfile();
-		this.endpoint = endpoint;
-		this.path = path;
-		this.sdkVersion = AbstractClient.SDK_VERSION;
-		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-    }
-    
-    /**
-     * 构造client(针对个别api要求的参数与常规api传的值不同，特殊参数较多的情况建议用这个)
-     * 比如mysql的apiVersion要求的值是2018-03-20，其它大部分都可以传2017-03-12
+     * 构造request(特殊案例走原生传值)
      * @param endpoint   api地址
      * @param version    api版本
      * @param path       api路径(/或/v2/index)
@@ -155,14 +183,13 @@ public class ApiRequest{
      * @param region     区域(默认ap-guangzhou)
      */
     public ApiRequest(String endpoint,String path,Credential credential, 
-    		String region,String sdkVersion,String apiVersion) {
+    		String region,String apiVersion) {
     	this.credential = credential;
 		this.profile = new ClientProfile();
 		this.endpoint = endpoint;
 		this.region = region;
 		this.path = path;
 		this.apiVersion = apiVersion;
-		this.sdkVersion = sdkVersion;
 		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
     
@@ -174,14 +201,14 @@ public class ApiRequest{
      * @param credential 秘钥相关
      * @param region     区域(默认ap-guangzhou)
      */
-    public ApiRequest(String endpoint,String path,Credential credential, String region) {
-    	this.credential = credential;
-		this.profile = new ClientProfile();
-		this.endpoint = endpoint;
-		this.region = region;
-		this.path = path;
-		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-    }
+//    public ApiRequest(String endpoint,String path,Credential credential, String region) {
+//    	this.credential = credential;
+//		this.profile = new ClientProfile();
+//		this.endpoint = endpoint;
+//		this.region = region;
+//		this.path = path;
+//		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//    }
     
     
     /**
@@ -191,7 +218,7 @@ public class ApiRequest{
      * @return
      * @throws TencentCloudSDKException
      */
-    public JSONObject recvResponseRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
+    public JSONObject recvResponseRequest(Map<String, String> param)  throws TencentCloudSDKException {
 		
 		Response okRsp = null;
 		String endpoint = this.endpoint;
@@ -250,7 +277,7 @@ public class ApiRequest{
      * @return
      * @throws TencentCloudSDKException
      */
-    public JSON recvCodeRequest(Map<String, String> param, String actionName)  throws TencentCloudSDKException {
+    public JSON recvCodeRequest(Map<String, String> param)  throws TencentCloudSDKException {
 		Response okRsp = null;
 		String endpoint = this.endpoint;
 		if (!(this.getClientProfile().getHttpProfile().getEndpoint() == null)) {

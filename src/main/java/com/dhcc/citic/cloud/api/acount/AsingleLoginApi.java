@@ -50,10 +50,10 @@ public class AsingleLoginApi extends BaseCtrl{
 			return BaseResult.getDesignErr(RetCode.VALID_ERR,ErrCode.COM_VALID_ERR,"请传入uin");
 		}
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest apiReq = new ApiRequest("open.api.qcloud.com","/v2/index.php", cred);
+		ApiRequest apiReq = new ApiRequest("ChannelGetLoginToken", cred);
 		HashMap<String,String> reqParam = new HashMap<String,String>();
 		reqParam.put("qcloudUin", uin);
-		JSONObject apiRep = (JSONObject)apiReq.recvCodeRequest(reqParam, "ChannelGetLoginToken");
+		JSONObject apiRep = (JSONObject)apiReq.recvCodeRequest(reqParam);
 		String token  = apiRep.getString("token");
 		String signature = Sign.sign(apiRep.getString("key"), apiRep.getString("token") + qcloudConfig.getPeerUin(), "HmacSHA1");
 		rep.sendRedirect("https://cloud.tencent.com/login/channelAccessCallback?fromUin="

@@ -49,7 +49,7 @@ public class MysqlServiceImpl implements MysqlService{
 	 * @throws TencentCloudSDKException
 	 */
 	@Override
-	public BaseResult describeDBInstances(String urlcode, String orgId, JSONObject params)
+	public BaseResult describeDBInstances(String orgId, JSONObject params)
 			throws TencentCloudSDKException {
 		//json格式的请求参数转为一符合腾讯api格式的一维map
 		HashMap<String, String> reqMap = new HashMap<String, String>();
@@ -59,12 +59,10 @@ public class MysqlServiceImpl implements MysqlService{
 		//构造认证类(tmpSecretId,tmpSecretKey,sessionToken)
 		//如果传入的是用户临时信息，则此处需要传入sessionToken，否则传入secretId、secretKey即可
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
-		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
 		//构造请求client
-		ApiRequest req = new ApiRequest(endPoint,"/",cred,"ap-guangzhou","SDK_JAVA_3.0.8","2017-03-20");
+		ApiRequest req = new ApiRequest("DescribeDBInstances",cred);
 		//调用腾讯接口
-		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeDBInstances");
+		JSONObject rep = req.recvResponseRequest(reqMap);
 		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"Items");
 		//将数据包装成中信要求的格式
 		return new BaseResult(result);

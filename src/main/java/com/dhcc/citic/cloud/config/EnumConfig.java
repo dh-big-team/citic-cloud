@@ -77,6 +77,77 @@ public class EnumConfig {
 		}
 	}
 	
+	/**
+	 * @Description:腾讯api版本号
+	 * @filename:EnumConfig.java
+	 * @author:Zeng Dongcheng
+	 * @version:1.0  
+	 * @Date:下午2:02:41 
+	 */
+	public enum ApiVersion{
+		V20170312("2017-03-12"),V20170320("2017-03-20"),
+		V20180408("2018-04-08"),V20180523("2018-05-23");
+		private String version;
+		
+		private ApiVersion(String version){
+			this.version = version;
+		}
+		public String getVersion() {
+			return version;
+		}
+	}
+	
+	/**
+	 * @Description:腾讯api调用地址
+	 * @filename:EnumConfig.java
+	 * @author:Zeng Dongcheng
+	 * @version:1.0  
+	 * @Date:下午2:02:41 
+	 */
+	public enum ApiUrl{
+		CVM("cvm.tencentcloudapi.com"),
+		CBS("cbs.tencentcloudapi.com"),
+		CDB("cdb.tencentcloudapi.com"),
+		VPC("vpc.tencentcloudapi.com"),
+		VPC2("vpc.api.qcloud.com"),
+		ACC("account.api.qcloud.com"),
+		CAM("cam.api.qcloud.com"),
+		OPEN("open.api.qcloud.com");
+		
+		private String url;
+		
+		private ApiUrl(String url){
+			this.url = url;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+	}
+	
+	/**
+	 * @Description:腾讯api path路径
+	 * @filename:EnumConfig.java
+	 * @author:Zeng Dongcheng
+	 * @version:1.0  
+	 * @Date:下午2:02:41 
+	 */
+	public enum ApiPath{
+		V1("/"),
+		V2("/v2/index.php");
+		private String path;
+		
+		private ApiPath(String path){
+			this.path = path;
+		}
+
+		public String getPath() {
+			return path;
+		}
+	}
+	
+	
+	
 	//用户状态
 	public enum UserStatus{
 		Active('1'),InActive('0');

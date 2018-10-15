@@ -48,11 +48,11 @@ public class AcountApi extends BaseCtrl{
 	public BaseResult apiDescribeInstances(@RequestBody String recvParam) throws TencentCloudSDKException{
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret("100007839763");
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
-		ApiRequest req = new ApiRequest("account.api.qcloud.com","/v2/index.php", cred);
+		ApiRequest req = new ApiRequest("DescribeProject", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		ReqParamUtil.jsonStrToMap(reqParam, recvParam);
-		JSON rep = req.recvCodeRequest(reqParam, "DescribeProject");
+		JSON rep = req.recvCodeRequest(reqParam);
 		return new BaseResult(rep);
 	}
 	
@@ -65,11 +65,11 @@ public class AcountApi extends BaseCtrl{
 	@RequestMapping(value = "/user")
 	public BaseResult addChildUser(@RequestBody String recvParam) throws TencentCloudSDKException{
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest req = new ApiRequest("cam.api.qcloud.com","/v2/index.php", cred);
+		ApiRequest req = new ApiRequest("AddUser", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		ReqParamUtil.jsonStrToMap(reqParam, recvParam);
-		JSON rep = req.recvCodeRequest(reqParam, "AddUser");
+		JSON rep = req.recvCodeRequest(reqParam);
 		return new BaseResult(rep);
 	}
 	
@@ -82,11 +82,11 @@ public class AcountApi extends BaseCtrl{
 	@RequestMapping(value = "/private/user")
 	public BaseResult addPrivateChildUser(@RequestBody String recvParam) throws TencentCloudSDKException{
 		Credential cred = new Credential(qcloudConfig.getSecretId(), qcloudConfig.getSecretKey());
-		ApiRequest req = new ApiRequest("open.api.qcloud.com","/v2/index.php", cred);
+		ApiRequest req = new ApiRequest("ChannelRegisterUser", cred);
 		req.getClientProfile().getHttpProfile().setReqMethod(HttpProfile.REQ_GET);
 		HashMap<String,String> reqParam =new HashMap<String,String>();
 		ReqParamUtil.jsonStrToMap(reqParam, recvParam);
-		JSON rep = req.recvCodeRequest(reqParam, "ChannelRegisterUser");
+		JSON rep = req.recvCodeRequest(reqParam);
 		return new BaseResult(rep);
 	}
 	
