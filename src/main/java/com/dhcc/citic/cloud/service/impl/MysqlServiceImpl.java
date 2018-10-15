@@ -79,8 +79,16 @@ public class MysqlServiceImpl implements MysqlService{
 	@Override
 	public BaseResult createDBInstance(String orgId, JSONObject params)
 			throws TencentCloudSDKException {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, String> reqMap = new HashMap<String, String>();
+		ReqParamUtil.jsonObjectToMap(reqMap, params);
+		//生成腾讯鉴权
+		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
+		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
+		//组合接口域名
+		ApiRequest req = new ApiRequest("CreateDBInstance",cred);
+		//调用腾讯接口
+		JSONObject rep = req.recvResponseRequest(reqMap);
+		return new BaseResult(rep);
 	}
 
 	@Override
