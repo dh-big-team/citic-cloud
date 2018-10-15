@@ -16,6 +16,22 @@ import com.dhcc.citic.cloud.service.TmpSecretService;
 import com.dhcc.citic.cloud.utils.ReqParamUtil;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
+/**
+ * 
+ * 类名称		       云硬盘业务接口实现类
+ * 文件名称:     CbsService.java
+ * 内容摘要: 
+ * @author:   duan zhang quan
+ * @version:  1.0  
+ * @Date:     2018年10月15日
+ * 
+ * 修改历史:  
+ * 修改日期                     修改人员                                   版本	            修改内容  
+ * ----------------------------------------------  
+ *
+ * 版权:   版权所有(C)2018
+ * 公司:   东华云计算有限公司
+ */
 @Service("cbsService")
 public class CbsServiceImpl implements  CbsService{
 	@Autowired
@@ -25,7 +41,7 @@ public class CbsServiceImpl implements  CbsService{
 	@Autowired
 	TmpSecretService tmpSecretService;
 	@Override
-	public BaseResult citicDescribeDisks(String urlCode,String orgId,JSONObject params)throws TencentCloudSDKException {
+	public BaseResult describeDisks(String urlCode,String orgId,JSONObject params)throws TencentCloudSDKException {
 		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
 		HashMap<String, String> reqMap = new HashMap<String, String>();
 		ReqParamUtil.jsonObjectToMap(reqMap, params);
