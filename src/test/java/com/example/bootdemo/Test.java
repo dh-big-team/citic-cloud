@@ -16,6 +16,12 @@ public class Test {
 		 for(String key : paramMap.keySet()){
 			 System.out.println(key+"："+paramMap.get(key));
 		 }
+		
+		int totalRecord = 0;
+		int pageSize = 3;
+		int totalPage = (totalRecord  +  pageSize  - 1) / pageSize;
+		System.out.println(totalPage);
+		
 		 
 	}
 	

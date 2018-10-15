@@ -77,14 +77,14 @@ public class MysqlServiceImpl implements MysqlService{
 	 * @throws TencentCloudSDKException
 	 */
 	@Override
-	public BaseResult createDBInstance(String urlCode, String orgId, JSONObject params)
+	public BaseResult createDBInstance(String orgId, JSONObject params)
 			throws TencentCloudSDKException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BaseResult createDBInstanceHour(String urlCode, String orgId, JSONObject params)
+	public BaseResult createDBInstanceHour(String orgId, JSONObject params)
 			throws TencentCloudSDKException {
 		// TODO Auto-generated method stub
 		return null;

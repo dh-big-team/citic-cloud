@@ -113,34 +113,7 @@ public class ApiRequest{
 		this.actionName = actionName;
 	}
 
-	/**
-     * 构造client(3.0版且区域传默认值ap-guangzhou建议用这个)
-     * @param endpoint   api地址
-     * @param credential 秘钥相关
-     */
-//	public ApiRequest(String actionName,String endpoint,Credential credential){
-//		this.credential = credential;
-//		this.profile = new ClientProfile();
-//		this.endpoint = endpoint;
-//		this.actionName = actionName;
-//		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-//	}
 	
-	/**
-     * 构造client(3.0版且区域自定义建议用这个)
-     * @param endpoint   api地址
-     * @param version    api版本
-     * @param credential 秘钥相关
-     * @param region     区域(默认ap-guangzhou)
-     */
-//    public ApiRequest(String actionName,String endpoint,Credential credential, String region) {
-//    	this.credential = credential;
-//		this.profile = new ClientProfile();
-//		this.endpoint = endpoint;
-//		this.region = region;
-//		this.actionName = actionName;
-//		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-//    }
     
     /**
      * 构造请求request(区域传默认值ap-guangzhou建议用这个)
@@ -195,23 +168,6 @@ public class ApiRequest{
 		this.apiVersion = apiVersion;
 		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
-    
-    /**
-     * 构造client(3.0以下版本且区域自定义建议用这个)
-     * @param endpoint   api地址
-     * @param version    api版本
-     * @param path       api路径(/或/v2/index)
-     * @param credential 秘钥相关
-     * @param region     区域(默认ap-guangzhou)
-     */
-//    public ApiRequest(String endpoint,String path,Credential credential, String region) {
-//    	this.credential = credential;
-//		this.profile = new ClientProfile();
-//		this.endpoint = endpoint;
-//		this.region = region;
-//		this.path = path;
-//		this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-//    }
     
     
     /**

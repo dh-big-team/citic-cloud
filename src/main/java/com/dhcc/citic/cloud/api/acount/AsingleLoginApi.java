@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
+import com.dhcc.citic.cloud.api.product.Base;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.config.QcloudConfig;
 import com.dhcc.citic.cloud.config.EnumConfig.ErrCode;
 import com.dhcc.citic.cloud.config.EnumConfig.RetCode;
-import com.dhcc.citic.cloud.ctrl.BaseCtrl;
 import com.dhcc.citic.cloud.req.ApiRequest;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.Sign;
@@ -37,7 +37,7 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  */
 @RestController
 @RequestMapping(value = "/asingle")
-public class AsingleLoginApi extends BaseCtrl{
+public class AsingleLoginApi extends Base{
 
 	@Autowired
 	QcloudConfig qcloudConfig;

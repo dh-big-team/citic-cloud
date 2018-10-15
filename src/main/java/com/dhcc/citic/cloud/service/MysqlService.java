@@ -39,7 +39,7 @@ public interface MysqlService {
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult createDBInstance(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult createDBInstance(String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 	
 	/**
@@ -50,6 +50,6 @@ public interface MysqlService {
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult createDBInstanceHour(String urlCode,String orgId,JSONObject params) throws TencentCloudSDKException;
+	public BaseResult createDBInstanceHour(String orgId,JSONObject params) throws TencentCloudSDKException;
 	
 }

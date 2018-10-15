@@ -13,7 +13,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.dhcc.citic.cloud.model.SysUser;
-import com.dhcc.citic.cloud.service.UserService;
 
 
 @Ignore
@@ -21,22 +20,9 @@ import com.dhcc.citic.cloud.service.UserService;
 @SpringBootTest
 public class BootDemoApplicationTests {
 
-	@Autowired
-	private UserService userService;
+	
 	@Autowired
     private RedisTemplate<String, String> redisTemplate;
-	
-	@Ignore
-	@Test
-	public void testSaveUser() {
-		SysUser user = new SysUser();
-		user.setLoginName("zhangsan");
-		user.setLoginPwd("123456");
-		user.setPwdSalt("111111");
-		user.setUserStatus("1");
-		Assert.assertTrue(userService.addUser(user));
-	}
-	
 	
 	@Ignore
 	@Test

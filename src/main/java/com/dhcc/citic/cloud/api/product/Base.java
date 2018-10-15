@@ -1,4 +1,4 @@
-package com.dhcc.citic.cloud.ctrl;
+package com.dhcc.citic.cloud.api.product;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,7 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 
-public class BaseCtrl {
+public class Base {
 	
 	@InitBinder
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {

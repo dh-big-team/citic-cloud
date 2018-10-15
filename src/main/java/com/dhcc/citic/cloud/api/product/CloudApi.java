@@ -1,4 +1,4 @@
-package com.dhcc.citic.cloud.ctrl;
+package com.dhcc.citic.cloud.api.product;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +33,9 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  */
 @RestController
 @RequestMapping(value = "/qcloud",produces = "application/json;charset=UTF-8")
-public class CloudCtrl extends BaseCtrl{
+public class CloudApi extends Base{
 	
-	private static final Logger LOG = LoggerFactory.getLogger(CloudCtrl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CloudApi.class);
 	@Autowired
 	private ServiceManager serviceManager;
 
