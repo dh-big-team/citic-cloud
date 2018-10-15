@@ -61,25 +61,23 @@ public class ServiceManagerImpl implements ServiceManager
 	{
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
-		//获取域名前缀
-		String urlCode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
 		
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.describeInstances(urlCode, orgId, params);
+			return cvmService.describeInstances(orgId, params);
 		case "cbs":
-			return cbsService.describeDisks(urlCode, orgId, params);
+			return cbsService.describeDisks(orgId, params);
 		case "mysql":
-			return mysqlService.describeDBInstances(urlCode, orgId, params);
+			return mysqlService.describeDBInstances(orgId, params);
 		case "nat":
 			return null;
 		case "vpn":
-			return vpnService.describeVpnGateways(urlCode, orgId, params);
+			return vpnService.describeVpnGateways(orgId, params);
 		case "ip":
-			return ipService.describeAddresses(urlCode, orgId, params);
+			return ipService.describeAddresses(orgId, params);
 		case "vpc":
-			return vpcService.describeVpcs(urlCode, orgId, params);
+			return vpcService.describeVpcs(orgId, params);
 		default:
 			throw new TencentCloudSDKException("The serviceId is nonsupport!");
 		}
@@ -96,13 +94,11 @@ public class ServiceManagerImpl implements ServiceManager
 	{
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
-		//获取域名前缀
-		String urlCode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
 		
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.runInstances(urlCode, orgId, params);
+			return cvmService.runInstances(orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":
@@ -110,11 +106,11 @@ public class ServiceManagerImpl implements ServiceManager
 		case "nat":
 			return null;
 		case "vpn":
-			return vpnService.createVpnGateway(urlCode, orgId, params);
+			return vpnService.createVpnGateway(orgId, params);
 		case "ip":
-			return ipService.allocateAddresses(urlCode, orgId, params);
+			return ipService.allocateAddresses(orgId, params);
 		case "vpc":
-			return vpcService.createVpc(urlCode, orgId, params);
+			return vpcService.createVpc(orgId, params);
 		default:
 			throw new TencentCloudSDKException("The serviceId is nonsupport!");
 		}
@@ -131,13 +127,11 @@ public class ServiceManagerImpl implements ServiceManager
 	{
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
-		//获取域名前缀
-		String urlCode = serviceIdMappingConfig.getUrlCodeByProductId(productId);
 		
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.runInstances(urlCode, orgId, params);
+			return cvmService.runInstances(orgId, params);
 		case "cbs":
 			return null;
 		case "mysql":

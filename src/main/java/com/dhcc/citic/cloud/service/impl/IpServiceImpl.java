@@ -45,7 +45,7 @@ public class IpServiceImpl implements IpService
 	TmpSecretService tmpSecretService;
 	
 	@Override
-	public BaseResult describeAddresses(String urlcode, String orgId, JSONObject params) throws TencentCloudSDKException
+	public BaseResult describeAddresses(String orgId, JSONObject params) throws TencentCloudSDKException
 	{
 		//将公用的参数名称instanceIds，改为VPN中对应的参数名称vpnGatewayIds
 		String addressIds = params.getString("instanceIds");
@@ -60,12 +60,11 @@ public class IpServiceImpl implements IpService
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
-		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
+		//构造请求client
+		ApiRequest req = new ApiRequest("DescribeAddresses",cred);
 		
 		//调用腾讯接口
-		ApiRequest req = new ApiRequest(endPoint, cred);
-		JSONObject rep = req.recvResponseRequest(reqMap, "DescribeAddresses");
+		JSONObject rep = req.recvResponseRequest(reqMap);
 		
 		//将数据包装成中信要求的格式
 		CiticQueryResult result = new CiticQueryResult(reqMap,rep,"AddressSet");
@@ -74,7 +73,7 @@ public class IpServiceImpl implements IpService
 	}
 
 	@Override
-	public BaseResult allocateAddresses(String urlcode,String orgId,JSONObject params) throws TencentCloudSDKException
+	public BaseResult allocateAddresses(String orgId,JSONObject params) throws TencentCloudSDKException
 	{
 		//将结构数据转化为一维字符串MAP
 		HashMap<String, String> reqMap = new HashMap<String, String>();
@@ -84,13 +83,11 @@ public class IpServiceImpl implements IpService
 		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
 		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
 		
-		//组合接口域名
-		String endPoint = urlcode + serviceIdMappingConfig.getUrlSuffixV3();
-		
-		ApiRequest req = new ApiRequest(endPoint, cred);
+		//构造请求client
+		ApiRequest req = new ApiRequest("AllocateAddresses",cred);
 		
 		//调用腾讯接口
-		JSONObject rep = req.recvResponseRequest(reqMap, "AllocateAddresses");
+		JSONObject rep = req.recvResponseRequest(reqMap);
 		
 		
 		return new BaseResult(rep);
