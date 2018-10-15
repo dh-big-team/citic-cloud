@@ -19,7 +19,7 @@ import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称		  VPN业务类
+ * 类名称		  VPN业务实现类
  * 文件名称:     VpnServiceImpl.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman

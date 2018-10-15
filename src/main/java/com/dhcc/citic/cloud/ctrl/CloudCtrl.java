@@ -44,7 +44,7 @@ public class CloudCtrl extends BaseCtrl{
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/select_instances",method = RequestMethod.GET)
+	@RequestMapping(value = "/service_instances",method = RequestMethod.GET)
 	public BaseResult QueryInstances() throws TencentCloudSDKException{
 		//取得请求参数
 		Map<String, String[]> reqMap = new HashMap<>(super.getParameterMap());
@@ -77,7 +77,7 @@ public class CloudCtrl extends BaseCtrl{
 	 * @return
 	 * @throws TencentCloudSDKException 
 	 */
-	@RequestMapping(value = "/create_instances",method = RequestMethod.POST)
+	@RequestMapping(value = "/service_instances",method = RequestMethod.POST)
 	public BaseResult createInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
 		
 		//取出参数
@@ -91,6 +91,28 @@ public class CloudCtrl extends BaseCtrl{
 		String requestId = (String) jsonParam.get("requestId");*/
 		
 		LOG.info("开始创建serviceId="+serviceId+"实例：");
+		return serviceManager.doCreate(serviceId, orgId, params);
+	}
+	
+	/**
+	 * 修改实例接口
+	 * @return
+	 * @throws TencentCloudSDKException 
+	 */
+	@RequestMapping(value = "/service_instances",method = RequestMethod.PUT)
+	public BaseResult changeInstances(@RequestBody JSONObject jsonParam) throws TencentCloudSDKException{
+		
+		//取出参数
+		JSONObject citicInfo = jsonParam.getJSONObject("citicInfo");
+		JSONObject params = jsonParam.getJSONObject("params");
+		String serviceId = (String) jsonParam.get("serviceId");
+		String orgId = citicInfo.getString("orgId");
+		//暂时用不到
+		/*JSONObject otherInfo = jsonParam.getJSONObject("otherInfo");
+		String instanceId = (String) jsonParam.get("instanceId");		
+		String requestId = (String) jsonParam.get("requestId");*/
+		
+		LOG.info("开始修改serviceId="+serviceId+"实例：");
 		return serviceManager.doCreate(serviceId, orgId, params);
 	}
 

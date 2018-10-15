@@ -19,7 +19,7 @@ import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称		       私有网络业务类
+ * 类名称		       私有网络业务实现类
  * 文件名称:     VpcServiceImpl.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman

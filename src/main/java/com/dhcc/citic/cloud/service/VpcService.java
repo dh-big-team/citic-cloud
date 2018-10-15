@@ -5,7 +5,7 @@ import com.dhcc.citic.cloud.common.BaseResult;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称		       私有网络业务类
+ * 类名称		       私有网络业务接口
  * 文件名称:     VpcService.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman

@@ -5,7 +5,7 @@ import com.dhcc.citic.cloud.common.BaseResult;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称		  VPN网关业务类
+ * 类名称		  VPN网关业务接口
  * 文件名称:     VpnService.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman

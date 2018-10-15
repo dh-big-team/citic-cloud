@@ -19,7 +19,7 @@ import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 /**
  * 
- * 类名称                      
+ * 类名称                      弹性公网IP业务实现类
  * 文件名称:     IpServiceImpl.java
  * 内容摘要: 
  * @author:   Zhao Xiaoman
