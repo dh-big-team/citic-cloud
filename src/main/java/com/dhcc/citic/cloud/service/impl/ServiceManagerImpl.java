@@ -52,6 +52,7 @@ public class ServiceManagerImpl implements ServiceManager
 	@Autowired
 	private IpService ipService;
 	
+	
 	/**
 	 * 查询实例列表业务分发
 	 * @param serviceId

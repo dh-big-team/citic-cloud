@@ -29,7 +29,6 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  */
 @Service("natGatewayService")
 public class NatGatewayServiceImpl implements NatGatewayService{
-
 	@Autowired
 	ServiceIdMappingConfig serviceIdMappingConfig;
 	@Autowired
