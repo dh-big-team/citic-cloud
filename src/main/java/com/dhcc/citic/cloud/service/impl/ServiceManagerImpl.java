@@ -102,7 +102,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "cbs":
 			return null;
 		case "mysql":
-			return null;
+			return mysqlService.createDBInstance(orgId, params);
 		case "nat":
 			return null;
 		case "vpn":

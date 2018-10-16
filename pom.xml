@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<name>citic-cloud</name>
-	<description>Demo project for Spring Boot</description>
+	<description>中信云适配器</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -154,6 +154,7 @@
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 		<!-- jsp支持 -->
+		<!--  
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -173,23 +174,26 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		-->
+		<!-- 验证码 -->
+		<!-- 
+		<dependency>
+		    <groupId>com.github.penggle</groupId>
+		    <artifactId>kaptcha</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		-->
 		<!-- 阿里json -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.47</version>
 		</dependency>
-		<!-- 验证码 -->
 		<dependency>
-		    <groupId>com.github.penggle</groupId>
-		    <artifactId>kaptcha</artifactId>
-		    <version>2.3.2</version>
-		</dependency>
-		<dependency>
-    	<groupId>com.tencentcloudapi</groupId>
-		    <!-- 注：这里的版本号请参考github或者maven仓库最新版本号  -->
-		    <artifactId>tencentcloud-sdk-java</artifactId>
-		    <version>3.0.8</version>
+	    	<groupId>com.tencentcloudapi</groupId>
+			    <!-- 注：这里的版本号请参考github或者maven仓库最新版本号  -->
+			    <artifactId>tencentcloud-sdk-java</artifactId>
+			    <version>3.0.8</version>
 		</dependency>
 	</dependencies>
 	<build>
