@@ -1,4 +1,4 @@
-package com.example.bootdemo;
+package com.dhcc.citic.cloud;
 
 import java.util.HashMap;
 import com.dhcc.citic.cloud.utils.ReqParamUtil;

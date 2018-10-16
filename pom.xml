@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.dhcc.citic</groupId>
-	<artifactId>citic-cloud</artifactId>
+	<artifactId>citic-cloud-adapter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>citic-cloud</name>
+	<name>citic-cloud-adapter</name>
 	<description>中信云适配器</description>
 
 	<parent>
@@ -191,9 +191,9 @@
 		</dependency>
 		<dependency>
 	    	<groupId>com.tencentcloudapi</groupId>
-			    <!-- 注：这里的版本号请参考github或者maven仓库最新版本号  -->
-			    <artifactId>tencentcloud-sdk-java</artifactId>
-			    <version>3.0.8</version>
+		    <!-- 注：这里的版本号请参考github或者maven仓库最新版本号  -->
+		    <artifactId>tencentcloud-sdk-java</artifactId>
+		    <version>3.0.8</version>
 		</dependency>
 	</dependencies>
 	<build>

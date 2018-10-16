@@ -1,8 +1,6 @@
 package com.dhcc.citic.cloud.model;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class SysUser implements Serializable{
    
@@ -44,7 +42,7 @@ public class SysUser implements Serializable{
 
 	private Date updDate;
 
-	private List<SysMenu> menuList;
+	
 	
 	private String token;
 
@@ -138,15 +136,6 @@ public class SysUser implements Serializable{
 		this.updDate = updDate;
 	}
 
-	public List<SysMenu> getMenuList() {
-		return menuList;
-	}
-
-	public void setMenuList(List<SysMenu> menuList) {
-		this.menuList = menuList;
-	}
-
-	
 	
 	public String getToken() {
 		return token;

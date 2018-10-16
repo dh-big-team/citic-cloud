@@ -27,10 +27,10 @@ import com.dhcc.citic.cloud.config.QcloudConfig;
 @EnableConfigurationProperties({QcloudConfig.class})
 //指定扫描的包路径，默认扫描Application当前目录及子目录
 //@ComponentScan(basePackages={"com.my.bootdemo","com.example.bootdemo"})
-public class BootDemoApplication {
+public class CloudAdapterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BootDemoApplication.class, args);
+		SpringApplication.run(CloudAdapterApplication.class, args);
 		//修改启动时的Banner
 		/*
 		* Banner.Mode.OFF:关闭;
