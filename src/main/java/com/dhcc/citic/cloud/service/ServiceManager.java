@@ -48,6 +48,6 @@ public interface ServiceManager
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult doUpdate(String serviceId, String orgId, JSONObject params) throws TencentCloudSDKException;
+	public BaseResult doUpdate(String serviceId, String orgId, String operationType, JSONObject params) throws TencentCloudSDKException;
 	
 }

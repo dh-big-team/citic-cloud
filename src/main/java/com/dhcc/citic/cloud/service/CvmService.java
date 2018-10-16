@@ -38,6 +38,14 @@ public interface CvmService
 	 * @throws TencentCloudSDKException
 	 */
 	public BaseResult runInstances(String orgId,JSONObject params) throws TencentCloudSDKException;
+	/**
+	 * 修改云服务器
+	 * @param orgId
+	 * @param operationType
+	 * @param params
+	 * @return
+	 * @throws TencentCloudSDKException
+	 */
+	public BaseResult updateInstance(String orgId,String operationType,JSONObject params) throws TencentCloudSDKException;
 	
-
 }

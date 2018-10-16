@@ -160,4 +160,29 @@ public class EnumConfig {
 	        return status;
 	    }
 	}
+	
+	/**
+	 * @Description:腾讯api操作标识
+	 * @filename:OperationType.java
+	 * @author:Zhao Xiaoman
+	 * @version:1.0  
+	 * @Date:下午6:02:41 
+	 */
+	public enum OperationType{
+		CVM_RI("ResetInstance"),							//重装实例
+		CVM_RIT("ResetInstancesType"),						//调整实例配置
+		CVM_RID("ResizeInstanceDisks"),						//扩容实例磁盘
+		CVM_RIIMB("ResetInstancesInternetMaxBandwidth"),	//调整实例带宽上限
+		CVM_MICT("ModifyInstancesChargeType");				//修改实例计费模式
+		
+		private String code;
+		
+		private OperationType(String code){
+			this.code = code;
+		}
+
+		public String getCode() {
+			return code;
+		}
+	}
 }

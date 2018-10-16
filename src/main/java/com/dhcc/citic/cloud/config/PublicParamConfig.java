@@ -31,6 +31,16 @@ public class PublicParamConfig {
 		publicParamMaps.put("DescribeInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
 		//创建实例
 		publicParamMaps.put("RunInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
+		//重装实例
+		publicParamMaps.put("ResetInstance", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
+		//调整实例配置
+		publicParamMaps.put("ResetInstancesType", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
+		//扩容实例磁盘
+		publicParamMaps.put("ResizeInstanceDisks", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
+		//调整实例带宽上限
+		publicParamMaps.put("ResetInstancesInternetMaxBandwidth", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
+		//修改实例计费模式
+		publicParamMaps.put("ModifyInstancesChargeType", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
 		
 		
 		/*********************云硬盘*****************/
