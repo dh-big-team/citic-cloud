@@ -35,7 +35,7 @@ import com.tencentcloudapi.common.profile.HttpProfile;
  * 公司:   东华云计算有限公司
  */
 @RestController
-@RequestMapping(value = "/api/account",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/account",produces = "application/json;charset=UTF-8")
 public class AcountApi extends Base{
 	
 	@Autowired

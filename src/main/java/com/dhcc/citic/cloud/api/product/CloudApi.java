@@ -32,7 +32,6 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
  * 公司:   东华云计算有限公司
  */
 @RestController
-@RequestMapping(value = "/qcloud",produces = "application/json;charset=UTF-8")
 public class CloudApi extends Base{
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CloudApi.class);
