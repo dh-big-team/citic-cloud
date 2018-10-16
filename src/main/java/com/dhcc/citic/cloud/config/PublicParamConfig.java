@@ -27,42 +27,46 @@ public class PublicParamConfig {
 	
 	static{
 		/*********************云主机*****************/
-		//查询云主机实例列表
+		//查询实例列表
 		publicParamMaps.put("DescribeInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
-		//创建云主机实例
+		//创建实例
 		publicParamMaps.put("RunInstances", new PublicParam(ApiUrl.CVM,ApiPath.V1,ApiVersion.V20170312));
 		
 		
 		/*********************云硬盘*****************/
-		//查询云硬盘实例列表
+		//查询实例列表
 		publicParamMaps.put("DescribeDisks", new PublicParam(ApiUrl.CBS,ApiPath.V1,ApiVersion.V20170312));
 		
 		
 		/*********************云数据库mysql*****************/
-		//查询mysql实例列表接口
+		//查询实例列表
 		publicParamMaps.put("DescribeDBInstances", new PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));	
 		//创建实例(包年包月)
-		publicParamMaps.put("CreateDBInstance", new PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));	//查询实例列表
+		publicParamMaps.put("CreateDBInstance", new PublicParam(ApiUrl.CDB,ApiPath.V1,ApiVersion.V20170320));
+		
 		
 		/*********************VPN网关*****************/
-		//查询实例
-		publicParamMaps.put("DescribeVpnGateways", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		//查询实例列表
+		publicParamMaps.put("DescribeVpnGateways", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		//创建实例
-		publicParamMaps.put("CreateVpnGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//创建实例
+		publicParamMaps.put("CreateVpnGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		
-		/*********************私有网络VPC*****************/
-		//查询实例
-		publicParamMaps.put("DescribeVpcs", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
+		
+		/*********************私有网络*****************/
+		//查询实例列表（创建VPN网关需要VpcId）
+		publicParamMaps.put("DescribeVpcs", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
+		//创建实例（暂时仅作测试用）
+		publicParamMaps.put("CreateVpc", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
+		
+		
+		/*********************弹性公网IP*****************/
+		//查询实例列表
+		publicParamMaps.put("DescribeAddresses", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		//创建实例
-		publicParamMaps.put("CreateVpc", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//创建实例
+		publicParamMaps.put("AllocateAddresses", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		
-		/*********************弹性公网*****************/
-		//查询实例
-		publicParamMaps.put("DescribeAddresses", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//查询实例列表
-		//创建实例
-		publicParamMaps.put("AllocateAddresses", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));	//创建实例
 		
-		/*********************私有网络VPC*****************/
+		/*********************Nat网关*****************/
 		//查询实例
 		publicParamMaps.put("DescribeNatGateway", new PublicParam(ApiUrl.VPC,ApiPath.V1,ApiVersion.V20170312));
 		
@@ -74,6 +78,7 @@ public class PublicParamConfig {
 		publicParamMaps.put("ChannelGetLoginToken", new PublicParam(ApiUrl.OPEN,ApiPath.V2,ApiVersion.V20170312));
 		//获取用户临时秘钥
 		publicParamMaps.put("AssumeRole", new PublicParam(ApiUrl.STS,ApiPath.V2,ApiVersion.V20170312));
+		
 		
 		/*********************公共部分*****************/
 		//获取区域
