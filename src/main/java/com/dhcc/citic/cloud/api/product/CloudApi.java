@@ -105,17 +105,16 @@ public class CloudApi extends Base{
 		//取出参数
 		JSONObject citicInfo = jsonParam.getJSONObject("citicInfo");
 		JSONObject params = jsonParam.getJSONObject("params");
+		String operationType = jsonParam.getString("operationType");
 		String serviceId = (String) jsonParam.get("serviceId");
 		String orgId = citicInfo.getString("orgId");
-		String instanceId = citicInfo.getString("instanceId");
-		String operationType = citicInfo.getString("operationType");
+		
 		//暂时用不到
-		/*JSONObject otherInfo = jsonParam.getJSONObject("otherInfo");
-		String instanceId = (String) jsonParam.get("instanceId");		
+		/*String instanceId = (String) jsonParam.get("instanceId");		
 		String requestId = (String) jsonParam.get("requestId");*/
 		
 		LOG.info("开始修改serviceId="+serviceId+"实例：");
-		return serviceManager.doCreate(serviceId, orgId, params);
+		return serviceManager.doUpdate(serviceId, orgId,operationType, params);
 	}
 
 }

@@ -105,7 +105,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "cbs":
 			return null;
 		case "mysql":
-			return null;
+			return mysqlService.createDBInstance(orgId, params);
 		case "nat":
 			return null;
 		case "vpn":
@@ -126,7 +126,7 @@ public class ServiceManagerImpl implements ServiceManager
 	 * @return
 	 * @throws TencentCloudSDKException
 	 */
-	public BaseResult doUpdate(String serviceId, String orgId, JSONObject params) throws TencentCloudSDKException
+	public BaseResult doUpdate(String serviceId, String orgId, String operationType, JSONObject params) throws TencentCloudSDKException
 	{
 		//获取腾讯对应的产品
 		String productId = serviceIdMappingConfig.getProductId(serviceId);
@@ -134,7 +134,7 @@ public class ServiceManagerImpl implements ServiceManager
 		switch (productId)
 		{
 		case "cvm":
-			return cvmService.runInstances(orgId, params);
+			return cvmService.updateInstance(orgId,operationType, params);
 		case "cbs":
 			return null;
 		case "mysql":

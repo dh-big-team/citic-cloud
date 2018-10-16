@@ -1,4 +1,4 @@
-package com.dhcc.citic.cloud.dao;
+package com.dhcc.citic.cloud.mapper;
 
 import java.util.List;
 

@@ -42,7 +42,14 @@ public class AsingleLoginApi extends Base{
 	@Autowired
 	QcloudConfig qcloudConfig;
 	
-	
+	/**
+	 * @Description:用户免密登录到腾讯控制台
+	 * @param req
+	 * @param rep
+	 * @return
+	 * @throws TencentCloudSDKException
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/login")
 	public BaseResult asingleLogin(HttpServletRequest req,HttpServletResponse rep) throws TencentCloudSDKException, IOException{
 		String uin = req.getParameter("uin");

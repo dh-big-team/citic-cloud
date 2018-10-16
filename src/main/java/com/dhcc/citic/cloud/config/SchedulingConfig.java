@@ -4,11 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
-
-//import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
-//import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
@@ -32,7 +28,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class SchedulingConfig {
 	
 	@Async("myAsync")
-	@Scheduled(cron = "0/5 * * * * ?") // 每20秒执行一次
+	@Scheduled(cron = "0/5 * * * * ?") // 每5秒执行一次
 	public void schedulerA() {
 		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println(sdf.format(new Date())+"任务A>>>>>>>>>begin");
@@ -45,7 +41,7 @@ public class SchedulingConfig {
 	}
 	
 	@Async("mySimpleAsync")
-	@Scheduled(cron = "0/10 * * * * ?") // 每20秒执行一次
+	@Scheduled(cron = "0/10 * * * * ?") // 每10秒执行一次
 	public void schedulerB() {
 		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println(sdf.format(new Date())+">>>>>>>>> 任务B");

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.dhcc.citic.cloud.common.BaseResult;
 import com.dhcc.citic.cloud.common.CiticQueryResult;
+import com.dhcc.citic.cloud.config.EnumConfig;
 import com.dhcc.citic.cloud.config.QcloudConfig;
 import com.dhcc.citic.cloud.config.ServiceIdMappingConfig;
 import com.dhcc.citic.cloud.model.TmpSecret;
@@ -66,7 +67,7 @@ public class CvmServiceImpl implements CvmService
 	@Override
 	public BaseResult runInstances(String orgId,JSONObject params) throws TencentCloudSDKException
 	{
-		//将实体转化成MAP，主要是将复杂结构的数据的key转化成key1.index.key2等，如DataDisks.0.DiskType=LOCAL_BASIC
+		//将结构类型数据，转化为一维MAP
 		HashMap<String, String> reqMap = new HashMap<String, String>();
 		ReqParamUtil.jsonObjectToMap(reqMap, params);
 		
@@ -77,6 +78,40 @@ public class CvmServiceImpl implements CvmService
 		//组合接口域名
 		ApiRequest req = new ApiRequest("RunInstances",cred);
 		
+		//调用腾讯接口
+		JSONObject rep = req.recvResponseRequest(reqMap);
+		
+		return new BaseResult(rep);
+	}
+
+	@Override
+	public BaseResult updateInstance(String orgId, String operationType, JSONObject params)throws TencentCloudSDKException
+	{
+		//将结构类型数据，转化为一维MAP
+		HashMap<String, String> reqMap = new HashMap<String, String>();
+		ReqParamUtil.jsonObjectToMap(reqMap, params);
+		
+		//生成腾讯鉴权
+		TmpSecret tmpSecret = tmpSecretService.getTmpSecret(orgId);
+		Credential cred = new Credential(tmpSecret.getTmpSecretId(), tmpSecret.getTmpSecretKey(),tmpSecret.getSessionToken());
+		
+		//根据操作类型operationType组合接口域名
+		ApiRequest req;
+		if (EnumConfig.OperationType.CVM_RI.getCode().equals(operationType))
+		{
+			req = new ApiRequest(EnumConfig.OperationType.CVM_RI.getCode(),cred);
+		}else if (EnumConfig.OperationType.CVM_RIT.getCode().equals(operationType)) {
+			req = new ApiRequest(EnumConfig.OperationType.CVM_RI.getCode(),cred);
+		}else if (EnumConfig.OperationType.CVM_RID.getCode().equals(operationType)) {
+			req = new ApiRequest(EnumConfig.OperationType.CVM_RID.getCode(),cred);
+		}else if (EnumConfig.OperationType.CVM_RIIMB.getCode().equals(operationType)) {
+			req = new ApiRequest(EnumConfig.OperationType.CVM_RIIMB.getCode(),cred);
+		}else if (EnumConfig.OperationType.CVM_MICT.getCode().equals(operationType)) {
+			req = new ApiRequest(EnumConfig.OperationType.CVM_MICT.getCode(),cred);
+		}else {
+			throw new TencentCloudSDKException("The operationType is nonsupport!");
+		}
+
 		//调用腾讯接口
 		JSONObject rep = req.recvResponseRequest(reqMap);
 		
