@@ -10,6 +10,7 @@ import com.dhcc.citic.cloud.service.CbsService;
 import com.dhcc.citic.cloud.service.CvmService;
 import com.dhcc.citic.cloud.service.IpService;
 import com.dhcc.citic.cloud.service.MysqlService;
+import com.dhcc.citic.cloud.service.NatGatewayService;
 import com.dhcc.citic.cloud.service.ServiceManager;
 import com.dhcc.citic.cloud.service.VpcService;
 import com.dhcc.citic.cloud.service.VpnService;
@@ -43,6 +44,8 @@ public class ServiceManagerImpl implements ServiceManager
 	@Autowired
 	private CbsService cbsService;
 	@Autowired
+	private NatGatewayService natGatewayService;
+	@Autowired
 	private VpnService vpnService;
 	@Autowired
 	private VpcService vpcService;
@@ -71,7 +74,7 @@ public class ServiceManagerImpl implements ServiceManager
 		case "mysql":
 			return mysqlService.describeDBInstances(orgId, params);
 		case "nat":
-			return null;
+			return natGatewayService.describeNatGateway(orgId, params);
 		case "vpn":
 			return vpnService.describeVpnGateways(orgId, params);
 		case "ip":
