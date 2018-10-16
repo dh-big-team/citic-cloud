@@ -63,7 +63,7 @@ public class AcountApi extends Base{
 	}
 	
 	/**
-	 * 云api开放的创建子用户接口
+	 * 获取用户临时秘钥
 	 * @param recvParam
 	 * @return
 	 * @throws TencentCloudSDKException
